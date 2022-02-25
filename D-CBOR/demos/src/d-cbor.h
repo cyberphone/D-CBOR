@@ -2,6 +2,13 @@
 
 int myfunc();
 
-void encodeTagAndValue(unsigned char* buffer, int tag, int length, unsigned long value);
+typedef struct {
+    int length;
+    int pos;
+    unsigned char *data;
+} CBOR_BUFFER;
 
-void encodeTagAndN(unsigned char* buffer, int majorType, unsigned long n);
+
+void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, unsigned __int64 value);
+
+void encodeTagAndN(CBOR_BUFFER *cborBuffer, int majorType, unsigned __int64 n);

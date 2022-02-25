@@ -21,6 +21,9 @@
     <ClCompile Include="src\d-cbor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ieee754.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\d-cbor.h">

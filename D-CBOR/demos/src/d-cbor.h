@@ -1,14 +1,19 @@
 #pragma once
 
-int myfunc();
-
 typedef struct {
     int length;
     int pos;
     unsigned char *data;
 } CBOR_BUFFER;
 
+void addInt(CBOR_BUFFER* cborBuffer, __int32 value);
 
-void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, unsigned __int64 value);
+void addString(CBOR_BUFFER* cborBuffer, char* utf8String);
 
-void encodeTagAndN(CBOR_BUFFER *cborBuffer, int majorType, unsigned __int64 n);
+void addBinary(CBOR_BUFFER* cborBuffer, void *blob, int sizeofBlob);
+
+void addRaw(CBOR_BUFFER* cborBuffer, void* cbor, int sizeofCbor);
+
+void addArray(CBOR_BUFFER* cborBuffer, __int32 elements);
+
+void addMap(CBOR_BUFFER* cborBuffer, __int32 elements);

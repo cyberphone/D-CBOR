@@ -28,7 +28,7 @@ const uint64_t FLOAT64_NEG_INFINITY = 0xfff0000000000000ul;
 const uint64_t FLOAT64_POS_ZERO     = 0x0000000000000000ul;
 const uint64_t FLOAT64_NEG_ZERO     = 0x8000000000000000ul;
 
-const uint64_t ONE                  = 0x8000000000000000ul;
+const uint64_t ONE                  = 0x0000000000000001ul;
 
 const int MT_FLOAT16 = 0xf9;
 const int MT_FLOAT32 = 0xfa;
@@ -60,7 +60,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
         int64_t exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
             ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
             (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
-        if (exponent > (FLOAT32_EXPONENT_BIAS << 1)) {
+        if (exponent > ((int64_t)FLOAT32_EXPONENT_BIAS << 1)) {
             // Too big for float32 or into the space reserved for NaN and Infinity.
             goto generate;
         }
@@ -101,7 +101,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
 
         // However, we must still check if the number could fit in a 16-bit float.
         exponent -= (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
-        if (exponent > (FLOAT16_EXPONENT_BIAS << 1)) {
+        if (exponent > ((int64_t)FLOAT16_EXPONENT_BIAS << 1)) {
             // Too big for float16 or into the space reserved for NaN and Infinity.
             goto generate;
         }

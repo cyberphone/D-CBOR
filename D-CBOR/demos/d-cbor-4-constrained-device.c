@@ -25,7 +25,7 @@ const unsigned char precomputedCbor[] = {
 const char blob1[40] = { 4, 6, 7, 8, 9, 10 };
 const char blob2[]   = { -1, 5 };
 
-#define BUFFER_SIZE 30
+#define BUFFER_SIZE 300
 
 void main() {
     // Buffer setup, here using the stack for storage.

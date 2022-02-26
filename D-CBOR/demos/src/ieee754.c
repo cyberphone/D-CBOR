@@ -90,7 +90,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
             } while (++exponent < 0);
         }
 #else
-        float floatValue = (double)((float)value);
+        float floatValue = (float)value;
         if (value != floatValue) {
             // After casting to float32 something got lost so we stick to float64.
             goto generate;

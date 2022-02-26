@@ -5,9 +5,13 @@
 #include "src/d-cbor.h"
 
 void printCborBuffer(CBOR_BUFFER *cborBuffer) {
-    printf("length=%d\n", cborBuffer->pos);
-    for (int i = 0; i < cborBuffer->pos; i++) {
-        printf("%02x", (int) cborBuffer->data[i]);
+    if (cborBuffer->length) {
+        printf("length=%d\n", cborBuffer->pos);
+        for (int i = 0; i < cborBuffer->pos; i++) {
+            printf("%02x", (int)cborBuffer->data[i]);
+        }
+    } else {
+        printf("Buffer overflow");
     }
     printf("\n");
 }
@@ -21,7 +25,7 @@ const unsigned char precomputedCbor[] = {
 const char blob1[40] = { 4, 6, 7, 8, 9, 10 };
 const char blob2[]   = { -1, 5 };
 
-#define BUFFER_SIZE 300
+#define BUFFER_SIZE 30
 
 void main() {
     // Buffer setup, here using the stack for storage.
@@ -50,7 +54,11 @@ void main() {
       addRawCbor(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
 #ifndef D_CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
+      addArray(&cborBuffer, 4);  // [#,#,#]
       addDouble(&cborBuffer, 35.6);
+      addDouble(&cborBuffer, 3.4028234663852886e+38);
+      addDouble(&cborBuffer, 3.4028234663852889e+38);
+      addDouble(&cborBuffer, 5.9604644775390625e-8);
 #endif
 
     // Do something with the generated CBOR.

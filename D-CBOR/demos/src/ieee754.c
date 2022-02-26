@@ -57,6 +57,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
         // It is apparently a regular number. Does it fit in a 32-bit float?
 
         uint64_t signBit = bitFormat & FLOAT64_NEG_ZERO;
+#ifndef D_CBOR_FLOAT_CAST
         int64_t exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
             ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
             (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
@@ -88,9 +89,17 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
                 significand >>= 1;
             } while (++exponent < 0);
         }
+#else
+        float floatValue = (double)((float)value);
+        if (value != floatValue) {
+            // After casting to float32 something got lost so we stick to float64.
+            goto generate;
+        }
+#endif
 
-        // New assumption: we settle on 32-bit float representation.
+        // New assumption: 32-bit float representation.
         tag = MT_FLOAT32;
+#ifndef D_CBOR_FLOAT_CAST
         bitFormat =
             // Put possible sign bit in position.
             (signBit >> (64 - 32)) +
@@ -98,14 +107,28 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
             (exponent << FLOAT32_SIGNIFICAND_SIZE) +
             // Significand.
             significand;
+#else
+        uint32_t floatBinary;
+        memcpy(&floatBinary, &floatValue, sizeof(float));
+        bitFormat = floatBinary;
+#endif
 
         // However, we must still check if the number could fit in a 16-bit float.
+#ifdef D_CBOR_FLOAT_CAST
+        int64_t exponent = ((bitFormat >> FLOAT32_SIGNIFICAND_SIZE) &
+            ((ONE << FLOAT32_EXPONENT_SIZE) - 1)) -
+            (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
+#else
         exponent -= (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
+#endif
         if (exponent > ((int64_t)FLOAT16_EXPONENT_BIAS << 1)) {
             // Too big for float16 or into the space reserved for NaN and Infinity.
             goto generate;
         }
 
+#ifdef D_CBOR_FLOAT_CAST
+        uint64_t significand = bitFormat & ((ONE << FLOAT32_SIGNIFICAND_SIZE) - 1);
+#endif
         if ((significand &
             ((ONE << (FLOAT32_SIGNIFICAND_SIZE - FLOAT16_SIGNIFICAND_SIZE)) - 1)) != 0) {
             // Losing significand bits is not an option.

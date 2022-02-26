@@ -1,19 +1,21 @@
 #pragma once
 
+#include <stdint.h>
+
 typedef struct {
     int length;
     int pos;
     unsigned char *data;
 } CBOR_BUFFER;
 
-void addInt(CBOR_BUFFER* cborBuffer, __int32 value);
+void addInt(CBOR_BUFFER* cborBuffer, int64_t value);
 
-void addString(CBOR_BUFFER* cborBuffer, char* utf8String);
+void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String);
 
-void addBinary(CBOR_BUFFER* cborBuffer, void *blob, int sizeofBlob);
+void addBstr(CBOR_BUFFER* cborBuffer, const void* blob, int sizeofBlob);
 
-void addRaw(CBOR_BUFFER* cborBuffer, void* cbor, int sizeofCbor);
+void addRawCbor(CBOR_BUFFER* cborBuffer, const void* rawCbor, int sizeofRawCbor);
 
-void addArray(CBOR_BUFFER* cborBuffer, __int32 elements);
+void addArray(CBOR_BUFFER* cborBuffer, int elements);
 
-void addMap(CBOR_BUFFER* cborBuffer, __int32 elements);
+void addMap(CBOR_BUFFER* cborBuffer, int keys);

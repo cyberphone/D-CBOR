@@ -24,6 +24,7 @@
     <ProjectGuid>{d67b31bc-97ac-455c-88b5-dc8587204d9c}</ProjectGuid>
     <RootNamespace>demos</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>demos</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="demos.c" />
+    <ClCompile Include="d-cbor-4-constrained-device.c" />
     <ClCompile Include="src\d-cbor.c" />
     <ClCompile Include="src\ieee754.c" />
   </ItemGroup>

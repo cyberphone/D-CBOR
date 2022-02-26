@@ -28,11 +28,13 @@ const uint64_t FLOAT64_NEG_INFINITY = 0xfff0000000000000ul;
 const uint64_t FLOAT64_POS_ZERO     = 0x0000000000000000ul;
 const uint64_t FLOAT64_NEG_ZERO     = 0x8000000000000000ul;
 
+const uint64_t ONE                  = 0x8000000000000000ul;
+
 const int MT_FLOAT16 = 0xf9;
 const int MT_FLOAT32 = 0xfa;
 const int MT_FLOAT64 = 0xfb;
 
-void doubleToShortest(double value) {
+void addDouble(CBOR_BUFFER *cborBuffer, double value) {
 
     // Initial assumption: value is a plain vanilla 64-bit double.
     int tag = MT_FLOAT64;
@@ -54,34 +56,34 @@ void doubleToShortest(double value) {
     } else {
         // It is apparently a regular number. Does it fit in a 32-bit float?
 
-        long signBit = bitFormat & FLOAT64_NEG_ZERO;
-        long exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
-            ((1l << FLOAT64_EXPONENT_SIZE) - 1)) -
+        uint64_t signBit = bitFormat & FLOAT64_NEG_ZERO;
+        int64_t exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
+            ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
             (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
         if (exponent > (FLOAT32_EXPONENT_BIAS << 1)) {
             // Too big for float32 or into the space reserved for NaN and Infinity.
-            return;
+            goto generate;
         }
 
-        long significand = bitFormat & ((1l << FLOAT64_SIGNIFICAND_SIZE) - 1);
+        uint64_t significand = bitFormat & ((ONE << FLOAT64_SIGNIFICAND_SIZE) - 1);
         if ((significand &
-            ((1l << (FLOAT64_SIGNIFICAND_SIZE - FLOAT32_SIGNIFICAND_SIZE)) - 1)) != 0) {
+            ((ONE << (FLOAT64_SIGNIFICAND_SIZE - FLOAT32_SIGNIFICAND_SIZE)) - 1)) != 0) {
             // Losing significand bits is not an option.
-            return;
+            goto generate;
         }
         significand >>= (FLOAT64_SIGNIFICAND_SIZE - FLOAT32_SIGNIFICAND_SIZE);
 
         // Check if we need to denormalize data.
         if (exponent <= 0) {
             // The implicit "1" becomes explicit using subnormal representation.
-            significand += 1l << FLOAT32_SIGNIFICAND_SIZE;
+            significand += ONE << FLOAT32_SIGNIFICAND_SIZE;
             exponent--;
             // Always perform at least one turn.
             do {
                 if ((significand & 1) != 0) {
                     // Too off scale for float32.
                     // This test also catches subnormal float64 numbers.
-                    return;
+                    goto generate;
                 }
                 significand >>= 1;
             } while (++exponent < 0);
@@ -101,27 +103,27 @@ void doubleToShortest(double value) {
         exponent -= (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
         if (exponent > (FLOAT16_EXPONENT_BIAS << 1)) {
             // Too big for float16 or into the space reserved for NaN and Infinity.
-            return;
+            goto generate;
         }
 
         if ((significand &
-            ((1l << (FLOAT32_SIGNIFICAND_SIZE - FLOAT16_SIGNIFICAND_SIZE)) - 1)) != 0) {
+            ((ONE << (FLOAT32_SIGNIFICAND_SIZE - FLOAT16_SIGNIFICAND_SIZE)) - 1)) != 0) {
             // Losing significand bits is not an option.
-            return;
+            goto generate;
         }
         significand >>= (FLOAT32_SIGNIFICAND_SIZE - FLOAT16_SIGNIFICAND_SIZE);
 
         // Check if we need to denormalize data.
         if (exponent <= 0) {
             // The implicit "1" becomes explicit using subnormal representation.
-            significand += 1l << FLOAT16_SIGNIFICAND_SIZE;
+            significand += ONE << FLOAT16_SIGNIFICAND_SIZE;
             exponent--;
             // Always perform at least one turn.
             do {
                 if ((significand & 1) != 0) {
                     // Too off scale for float16.
                     // This test also catches subnormal float32 numbers.
-                    return;
+                    goto generate;
                 }
                 significand >>= 1;
             } while (++exponent < 0);
@@ -137,4 +139,6 @@ void doubleToShortest(double value) {
             // Significand.
             significand;
     }
+generate:
+    encodeTagAndValue(cborBuffer, tag, 2 << (tag - MT_FLOAT16), bitFormat);
 }

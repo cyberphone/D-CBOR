@@ -32,18 +32,26 @@ void main() {
     cborBuffer.pos = 0;
 
     // Generate deterministic CBOR using ordered map keys.
-    addMap(&cborBuffer, 4);  // {$,$,$,$}
+#ifndef D_CBOR_NO_DOUBLE
+    addMap(&cborBuffer, 5);  // {#,#,#,#,#}
+#else
+    addMap(&cborBuffer, 4);  // {#,#,#,#}
+#endif
       addInt(&cborBuffer, 1);  // key: 1
       addBstr(&cborBuffer, blob1, sizeof(blob1));
       addInt(&cborBuffer, 2);  // key: 2
       addBstr(&cborBuffer, blob2, sizeof(blob2));
       addInt(&cborBuffer, 3);  // key: 3
-      addArray(&cborBuffer, 3);  // [$,$,$]
-        addInt(&cborBuffer, 1000);
+      addArray(&cborBuffer, 3);  // [#,#,#]
+        addInt(&cborBuffer, 9223372036854775807l);
         addInt(&cborBuffer, -523);
         addTstr(&cborBuffer, "Hello D-CBOR world!");
       addInt(&cborBuffer, 4);  // key: 4
       addRawCbor(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
+#ifndef D_CBOR_NO_DOUBLE
+      addInt(&cborBuffer, 5);  // key: 5
+      addDouble(&cborBuffer, 35.6);
+#endif
 
     // Do something with the generated CBOR.
     printCborBuffer(&cborBuffer);

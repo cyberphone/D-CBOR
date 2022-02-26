@@ -1,6 +1,5 @@
-// D-CBOR Core
+// D-CBOR - Core encoder for constrained devices.
 
-#include <stdio.h>
 #include <string.h>
 
 #include "d-cbor.h"
@@ -20,27 +19,30 @@ const int MT_FALSE         = 0xf4;
 const int MT_TRUE          = 0xf5;
 const int MT_NULL          = 0xf6;
 
-
-static unsigned char* getChunk(CBOR_BUFFER *cborBuffer, int size) {
-    if (cborBuffer->pos + size >= cborBuffer->length) {
-        printf("BUFFER FAILED");
+static void putCborByte(CBOR_BUFFER *cborBuffer, unsigned char byte) {
+    if (cborBuffer->pos >= cborBuffer->length) {
+        // Buffer overflow! Ignore call to avoid crashing hard.
+        cborBuffer->length = 0;  // Indication to upper layers.
+    } else {
+        cborBuffer->data[cborBuffer->pos++] = byte;
     }
-    unsigned char* ptr = cborBuffer->data + cborBuffer->pos;
-    cborBuffer->pos += size;
-    return ptr;
 }
 
 void addRawCbor(CBOR_BUFFER* cborBuffer, const void* rawCbor, int sizeofRawCbor) {
-    memcpy(getChunk(cborBuffer, sizeofRawCbor), rawCbor, sizeofRawCbor);
+    while (--sizeofRawCbor >= 0) {
+        putCborByte(cborBuffer, *((unsigned char *)rawCbor)++);
+    }
 }
 
 void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, uint64_t value) {
-    unsigned char* ptr = getChunk(cborBuffer, length + 1);
-    *ptr = (unsigned char) tag;
-    while (length > 0) {
-        ptr[length--] = (unsigned char)value;
+    putCborByte(cborBuffer, (unsigned char) tag);
+    unsigned char buffer[8];
+    int i = length;
+    while (--i >= 0) {
+        buffer[i] = (unsigned char)value;
         value >>= 8;
     }
+    addRawCbor(cborBuffer, buffer, length);
 }
 
 void encodeTagAndN(CBOR_BUFFER *cborBuffer, int majorType, uint64_t n) {

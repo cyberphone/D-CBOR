@@ -1,5 +1,7 @@
 // d-cbor-4-constrained-device.c
 
+#include "src/d-cbor.h"
+
 // For demonstration purposes only...
 #include <stdio.h>
 void printCborBuffer(CBOR_BUFFER *cborBuffer) {
@@ -13,8 +15,6 @@ void printCborBuffer(CBOR_BUFFER *cborBuffer) {
     }
     printf("\n");
 }
-
-#include "src/d-cbor.h"
 
 // ["precomputed rocks", true]
 const uint8_t precomputedCbor[] = { 

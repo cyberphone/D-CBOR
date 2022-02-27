@@ -19,7 +19,7 @@ const int MT_FALSE         = 0xf4;
 const int MT_TRUE          = 0xf5;
 const int MT_NULL          = 0xf6;
 
-static void putCborByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
+static void putByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
     if (cborBuffer->pos >= cborBuffer->length) {
         // Buffer overflow! Ignore call to avoid crashing hard.
         cborBuffer->length = 0;  // Indication to upper layers.
@@ -30,12 +30,12 @@ static void putCborByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
 
 void addRawBytes(CBOR_BUFFER* cborBuffer, const uint8_t* bytePointer, int length) {
     while (--length >= 0) {
-        putCborByte(cborBuffer, *bytePointer++);
+        putByte(cborBuffer, *bytePointer++);
     }
 }
 
 void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, uint64_t value) {
-    putCborByte(cborBuffer, (uint8_t) tag);
+    putByte(cborBuffer, (uint8_t) tag);
     uint8_t buffer[8];
     int i = length;
     while (--i >= 0) {
@@ -80,9 +80,9 @@ void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length) {
 }
 
 void addArray(CBOR_BUFFER* cborBuffer, int elements) {
-    encodeTagAndN(cborBuffer, MT_ARRAY, (uint64_t)elements);
+    encodeTagAndN(cborBuffer, MT_ARRAY, elements);
 }
 
 void addMap(CBOR_BUFFER* cborBuffer, int keys) {
-    encodeTagAndN(cborBuffer, MT_MAP, (uint64_t)keys);
+    encodeTagAndN(cborBuffer, MT_MAP, keys);
 }

@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d67b31bc-97ac-455c-88b5-dc8587204d9c}</ProjectGuid>
-    <RootNamespace>demos</RootNamespace>
+    <ProjectGuid>{3b17ea8c-dac3-4016-942d-9f18a9deb090}</ProjectGuid>
+    <RootNamespace>dcbor4constraineddevice</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>demos</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,12 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="d-cbor-4-constrained-device.c" />
-    <ClCompile Include="src\d-cbor.c" />
-    <ClCompile Include="src\ieee754.c" />
+    <ClInclude Include="..\lib\d-cbor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\d-cbor.h" />
+    <ClCompile Include="..\lib\d-cbor.c" />
+    <ClCompile Include="..\lib\ieee754.c" />
+    <ClCompile Include="d-cbor-4-constrained-device.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 // d-cbor-4-constrained-device.c
 
-#include "src/d-cbor.h"
+#include "../lib/d-cbor.h"
 
 // For demonstration purposes only...
 #include <stdio.h>

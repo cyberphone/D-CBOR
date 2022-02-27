@@ -5,16 +5,16 @@
 typedef struct {
     int length;
     int pos;
-    unsigned char *data;
+    uint8_t *data;
 } CBOR_BUFFER;
 
 void addInt(CBOR_BUFFER* cborBuffer, int64_t value);
 
 void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String);
 
-void addBstr(CBOR_BUFFER* cborBuffer, const void* blob, int sizeofBlob);
+void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* blob, int sizeofBlob);
 
-void addRawCbor(CBOR_BUFFER* cborBuffer, const void* rawCbor, int sizeofRawCbor);
+void addRawCbor(CBOR_BUFFER* cborBuffer, const uint8_t* rawCbor, int sizeofRawCbor);
 
 void addArray(CBOR_BUFFER* cborBuffer, int elements);
 

@@ -19,7 +19,7 @@ const int MT_FALSE         = 0xf4;
 const int MT_TRUE          = 0xf5;
 const int MT_NULL          = 0xf6;
 
-static void putCborByte(CBOR_BUFFER *cborBuffer, unsigned char byte) {
+static void putCborByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
     if (cborBuffer->pos >= cborBuffer->length) {
         // Buffer overflow! Ignore call to avoid crashing hard.
         cborBuffer->length = 0;  // Indication to upper layers.
@@ -28,18 +28,18 @@ static void putCborByte(CBOR_BUFFER *cborBuffer, unsigned char byte) {
     }
 }
 
-void addRawCbor(CBOR_BUFFER* cborBuffer, const void* rawCbor, int sizeofRawCbor) {
+void addRawCbor(CBOR_BUFFER* cborBuffer, const uint8_t* rawCbor, int sizeofRawCbor) {
     while (--sizeofRawCbor >= 0) {
-        putCborByte(cborBuffer, *((unsigned char *)rawCbor)++);
+        putCborByte(cborBuffer, *rawCbor++);
     }
 }
 
 void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, uint64_t value) {
-    putCborByte(cborBuffer, (unsigned char) tag);
-    unsigned char buffer[8];
+    putCborByte(cborBuffer, (uint8_t) tag);
+    uint8_t buffer[8];
     int i = length;
     while (--i >= 0) {
-        buffer[i] = (unsigned char)value;
+        buffer[i] = (uint8_t)value;
         value >>= 8;
     }
     addRawCbor(cborBuffer, buffer, length);
@@ -74,7 +74,7 @@ void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String) {
     addRawCbor(cborBuffer, utf8String, length);
 }
 
-void addBstr(CBOR_BUFFER* cborBuffer, const void* blob, int sizeofBlob) {
+void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* blob, int sizeofBlob) {
     encodeTagAndN(cborBuffer, MT_BYTE_STRING, sizeofBlob);
     addRawCbor(cborBuffer, blob, sizeofBlob);
 }

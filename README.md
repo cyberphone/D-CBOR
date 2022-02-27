@@ -69,7 +69,7 @@ D-CBOR enables this without wrapping data in `bstr` or `base64url`.
 __Q:__ Does D-CBOR affect decoders?<br>
 __A:__ Yes, advanced decoder/encoder designs typically use a single
 class to represent a specific type.  Deterministic serialization makes
-instances of such objects behave identically (_including serialization_),
+instances of such objects behave identically,
 regardless if they are created programmatically or are the
 result of a decoding process.
 All in the name of symmetry 😁

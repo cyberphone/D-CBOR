@@ -1,9 +1,7 @@
 // d-cbor-4-constrained-device.c
 
+// For demonstration purposes only...
 #include <stdio.h>
-
-#include "src/d-cbor.h"
-
 void printCborBuffer(CBOR_BUFFER *cborBuffer) {
     if (cborBuffer->length) {
         printf("length=%d\n", cborBuffer->pos);
@@ -15,6 +13,8 @@ void printCborBuffer(CBOR_BUFFER *cborBuffer) {
     }
     printf("\n");
 }
+
+#include "src/d-cbor.h"
 
 // ["precomputed rocks", true]
 const uint8_t precomputedCbor[] = { 
@@ -35,7 +35,7 @@ void main() {
     cborBuffer.length = BUFFER_SIZE;
     cborBuffer.pos = 0;
 
-    // Generate deterministic CBOR using ordered map keys.
+    // Generate deterministic CBOR using prearranged map key sorting.
 #ifndef CBOR_NO_DOUBLE
     addMap(&cborBuffer, 5);  // {#,#,#,#,#}
 #else
@@ -51,7 +51,7 @@ void main() {
         addInt(&cborBuffer, -523);
         addTstr(&cborBuffer, "Hello D-CBOR world!");
       addInt(&cborBuffer, 4);  // key: 4
-      addRawCbor(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
+      addRawBytes(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
 #ifndef CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
       addArray(&cborBuffer, 4);  // [#,#,#,#]

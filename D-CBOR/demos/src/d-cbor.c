@@ -28,9 +28,9 @@ static void putCborByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
     }
 }
 
-void addRawCbor(CBOR_BUFFER* cborBuffer, const uint8_t* rawCbor, int sizeofRawCbor) {
-    while (--sizeofRawCbor >= 0) {
-        putCborByte(cborBuffer, *rawCbor++);
+void addRawBytes(CBOR_BUFFER* cborBuffer, const uint8_t* bytePointer, int length) {
+    while (--length >= 0) {
+        putCborByte(cborBuffer, *bytePointer++);
     }
 }
 
@@ -42,7 +42,7 @@ void encodeTagAndValue(CBOR_BUFFER *cborBuffer, int tag, int length, uint64_t va
         buffer[i] = (uint8_t)value;
         value >>= 8;
     }
-    addRawCbor(cborBuffer, buffer, length);
+    addRawBytes(cborBuffer, buffer, length);
 }
 
 void encodeTagAndN(CBOR_BUFFER *cborBuffer, int majorType, uint64_t n) {
@@ -71,12 +71,12 @@ void addInt(CBOR_BUFFER* cborBuffer, int64_t value) {
 void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String) {
     int length = strlen(utf8String);
     encodeTagAndN(cborBuffer, MT_TEXT_STRING, length);
-    addRawCbor(cborBuffer, utf8String, length);
+    addRawBytes(cborBuffer, utf8String, length);
 }
 
-void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* blob, int sizeofBlob) {
-    encodeTagAndN(cborBuffer, MT_BYTE_STRING, sizeofBlob);
-    addRawCbor(cborBuffer, blob, sizeofBlob);
+void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length) {
+    encodeTagAndN(cborBuffer, MT_BYTE_STRING, length);
+    addRawBytes(cborBuffer, byteString, length);
 }
 
 void addArray(CBOR_BUFFER* cborBuffer, int elements) {

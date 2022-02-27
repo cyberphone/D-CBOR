@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\d-cbor.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

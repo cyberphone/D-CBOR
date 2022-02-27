@@ -1,4 +1,4 @@
-// D-CBOR IEEE-754 support
+// Determinstic CBOR IEEE-754 support
 
 #include <string.h>
 
@@ -58,7 +58,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
     } else {
         // It is apparently a regular number. Does it fit in a 32-bit float?
 
-#ifndef D_CBOR_FLOAT_CAST
+#ifndef PLATFORM_SUPPORTS_FLOAT_CAST
         int64_t exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
             ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
             (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
@@ -100,7 +100,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
 
         // Yes, the number is compatible with 32-bit float representation.
         tag = MT_FLOAT32;
-#ifndef D_CBOR_FLOAT_CAST
+#ifndef PLATFORM_SUPPORTS_FLOAT_CAST
         bitFormat =
             // Put sign bit in position.
             ((bitFormat >> (64 - 32)) & FLOAT32_NEG_ZERO) +
@@ -115,7 +115,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
 #endif
 
         // However, we must still check if the number could fit in a 16-bit float.
-#ifdef D_CBOR_FLOAT_CAST
+#ifdef PLATFORM_SUPPORTS_FLOAT_CAST
         int64_t exponent = ((bitFormat >> FLOAT32_SIGNIFICAND_SIZE) &
             ((ONE << FLOAT32_EXPONENT_SIZE) - 1)) -
             (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
@@ -127,7 +127,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
             goto generate;
         }
 
-#ifdef D_CBOR_FLOAT_CAST
+#ifdef PLATFORM_SUPPORTS_FLOAT_CAST
         uint64_t significand = bitFormat & ((ONE << FLOAT32_SIGNIFICAND_SIZE) - 1);
 #endif
         if ((significand &

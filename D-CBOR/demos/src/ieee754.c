@@ -22,6 +22,8 @@ const uint64_t FLOAT16_NEG_INFINITY = 0x000000000000fc00ul;
 const uint64_t FLOAT16_POS_ZERO     = 0x0000000000000000ul;
 const uint64_t FLOAT16_NEG_ZERO     = 0x0000000000008000ul;
 
+const uint64_t FLOAT32_NEG_ZERO     = 0x0000000080000000ul;
+
 const uint64_t FLOAT64_NOT_A_NUMBER = 0x7ff8000000000000ul;
 const uint64_t FLOAT64_POS_INFINITY = 0x7ff0000000000000ul;
 const uint64_t FLOAT64_NEG_INFINITY = 0xfff0000000000000ul;
@@ -56,7 +58,6 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
     } else {
         // It is apparently a regular number. Does it fit in a 32-bit float?
 
-        uint64_t signBit = bitFormat & FLOAT64_NEG_ZERO;
 #ifndef D_CBOR_FLOAT_CAST
         int64_t exponent = ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) &
             ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
@@ -97,12 +98,12 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
         }
 #endif
 
-        // New assumption: 32-bit float representation.
+        // Yes, the number is compatible with 32-bit float representation.
         tag = MT_FLOAT32;
 #ifndef D_CBOR_FLOAT_CAST
         bitFormat =
-            // Put possible sign bit in position.
-            (signBit >> (64 - 32)) +
+            // Put sign bit in position.
+            ((bitFormat >> (64 - 32)) & FLOAT32_NEG_ZERO) +
             // Exponent.  Put it in front of significand.
             (exponent << FLOAT32_SIGNIFICAND_SIZE) +
             // Significand.
@@ -155,8 +156,8 @@ void addDouble(CBOR_BUFFER *cborBuffer, double value) {
         // Seems like 16 bits indeed are sufficient!
         tag = MT_FLOAT16;
         bitFormat =
-            // Put possible sign bit in position.
-            (signBit >> (64 - 16)) +
+            // Put sign bit in position.
+            ((bitFormat >> (32 - 16)) & FLOAT16_NEG_ZERO) +
             // Exponent.  Put it in front of significand.
             (exponent << FLOAT16_SIGNIFICAND_SIZE) +
             // Significand.

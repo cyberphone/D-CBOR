@@ -166,8 +166,8 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
 ```
-The optional floating point encoder resides in
-[separate file](https://github.com/cyberphone/D-CBOR/blob/main/D-CBOR/demos/src/ieee754.c).
+The optional floating point encoder resides in a separate file:
+https://github.com/cyberphone/D-CBOR/blob/main/demos/src/ieee754.c.
 
-A compilable version of this example can be found in
-https://github.com/cyberphone/D-CBOR/tree/main/D-CBOR.
+A compilable version of this example can be found in:
+https://github.com/cyberphone/D-CBOR/tree/main/demos.

@@ -167,7 +167,7 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
 }
 ```
 The optional floating point encoder resides in a separate file:
-https://github.com/cyberphone/D-CBOR/blob/main/demos/src/ieee754.c.
+https://github.com/cyberphone/D-CBOR/blob/main/lib/ieee754.c.
 
-A compilable version of this example can be found in:
-https://github.com/cyberphone/D-CBOR/tree/main/demos.
+A runnable version of this example can be found in:
+https://github.com/cyberphone/D-CBOR/blob/main/d-cbor-4-constrained-device/d-cbor-4-constrained-device.c.

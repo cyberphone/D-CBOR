@@ -1,7 +1,13 @@
 # D-CBOR - Deterministic Serialization for CBOR
 
 ### Abstract
-_D-CBOR is a CBOR counterpart to the Distinguished Encoding Rules (DER) of ASN.1. D-CBOR builds on the preferred serialization options outlined in RFC8949, but with another target: secure cryptographic operations that does not require CBOR encoded data to be hashed etc. to be wrapped in byte-strings or similar in order to return a repeatable result. Although not the primary goal, by constraining serialization options, testing becomes easier, which in turn could foster interoperability._
+_D-CBOR is a CBOR counterpart to the Distinguished Encoding Rules (DER) 
+of ASN.1. D-CBOR builds on the preferred serialization options outlined 
+in RFC8949, but with another target: secure cryptographic operations that
+does not require CBOR encoded data to be hashed etc. to be wrapped in 
+byte-strings or similar in order to return a repeatable result
+Although not the primary goal, by constraining serialization options,
+testing becomes easier, which in turn should foster interoperability._
 
 ### Example
 The following example illustrates what can be accomplished with D-CBOR:
@@ -34,13 +40,39 @@ The very same object using an enveloped signature:
     }
 })
 ```
-Note: the signature scheme utilized above is an example and not a part D-CBOR. What D-CBOR brings to the table, is the ability keeping data _unwrapped_. This is by no means new; X.509 certificates have thanks to ASN.1 DER, been encoded in a similar fashion since their inception in the early 90ties.
+Note: the signature scheme utilized above is an example and not a part D-CBOR.
+What D-CBOR brings to the table, is the ability keeping data _unwrapped_,
+even in the case decoded data is _reencoded_.
+This is by no means new; X.509 certificates have thanks to ASN.1 DER,
+been encoded in a similar fashion since their inception in the early 90ties.
 
 ### Internet Draft
 To be supplied
 
 ### FAQ
-To be supplied
+__Q:__ Is D-CBOR a redefined CBOR?<br>
+__A:__ No, D-CBOR is 100% compatible with RFC8949 but
+imposes certain restrictions in order to achieve the stated goals.
+
+__Q:__ Is D-CBOR usable with constrained devices?<br>
+__A:__ Absolutely! Take a look at 
+[d-cbor-4-constrained-devices.md](d-cbor-4-constrained-devices.md)
+for more details.
+
+__Q:__ Home does _reencoding_ come into the picture?<br>
+__A:__ If you use cryptographic constructs like enveloped signatures
+or certain variants of authenticated encryption, data must stay
+in its original form between the decoding and reencoding
+steps mandated by such schemes.
+D-CBOR enables this without wrapping data in `bstr` or `base64url`.
+
+__Q:__ Does D-CBOR affect decoders?<br>
+__A:__ Yes, advanced decoder/encoder designs typically use a single
+class to represent a specific type.  Deterministic serialization makes
+instances of such objects behave identically (_including serialization_),
+regardless if they are created programmatically or are the
+result of a decoding process.
+All in the name of symmetry 😁
 
 ### Author
 A. Rundgren

@@ -68,7 +68,7 @@ void addInt(CBOR_BUFFER* cborBuffer, int64_t value) {
     encodeTagAndN(cborBuffer, tag, (uint64_t)value);
 }
 
-void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String) {
+void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String) {
     int length = strlen(utf8String);
     encodeTagAndN(cborBuffer, MT_TEXT_STRING, length);
     addRawCbor(cborBuffer, utf8String, length);

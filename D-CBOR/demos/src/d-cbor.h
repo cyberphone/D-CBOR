@@ -10,7 +10,7 @@ typedef struct {
 
 void addInt(CBOR_BUFFER* cborBuffer, int64_t value);
 
-void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String);
+void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String);
 
 void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* blob, int sizeofBlob);
 

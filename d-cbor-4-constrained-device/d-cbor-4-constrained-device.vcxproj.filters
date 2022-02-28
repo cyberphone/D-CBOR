@@ -23,7 +23,7 @@
     <ClCompile Include="..\lib\d-cbor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\ieee754.c">
+    <ClCompile Include="..\lib\d-cbor-ieee754.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="d-cbor-4-constrained-device.c">

@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\lib\d-cbor.c" />
-    <ClCompile Include="..\lib\ieee754.c" />
+    <ClCompile Include="..\lib\d-cbor-ieee754.c" />
     <ClCompile Include="d-cbor-4-constrained-device.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

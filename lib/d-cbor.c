@@ -47,7 +47,7 @@ static void putByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
     }
 }
 
-void addRawBytes(CBOR_BUFFER* cborBuffer, static const uint8_t* bytePointer, int length) {
+void addRawBytes(CBOR_BUFFER* cborBuffer, const uint8_t* bytePointer, int length) {
     while (--length >= 0) {
         putByte(cborBuffer, *bytePointer++);
     }
@@ -87,13 +87,13 @@ void addInt(CBOR_BUFFER* cborBuffer, int64_t value) {
     encodeTagAndN(cborBuffer, tag, (uint64_t)value);
 }
 
-void addTstr(CBOR_BUFFER* cborBuffer, static const uint8_t* utf8String) {
+void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String) {
     int length = strlen(utf8String);
     encodeTagAndN(cborBuffer, MT_TEXT_STRING, length);
     addRawBytes(cborBuffer, utf8String, length);
 }
 
-void addBstr(CBOR_BUFFER* cborBuffer, static const uint8_t* byteString, int length) {
+void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length) {
     encodeTagAndN(cborBuffer, MT_BYTE_STRING, length);
     addRawBytes(cborBuffer, byteString, length);
 }

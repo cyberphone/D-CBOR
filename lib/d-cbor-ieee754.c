@@ -84,7 +84,15 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
 
     // It must be a "regular" number. Does it fit in a 32-bit float?
 
-#ifndef PLATFORM_SUPPORTS_FLOAT_CAST
+#ifdef PLATFORM_SUPPORTS_FLOAT_CAST
+    // The following code presumes that the underlying floating point system handles
+    // overflow conditions and subnormal numbers that may be the result of a conversion.  
+    float f = (float)d;
+    if (d != f) {
+        // "Lost in translation".  Stick to float64.
+        goto done;
+    }
+#else
     int64_t exponent = 
         ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) & ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
         (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
@@ -115,20 +123,16 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
             significand >>= 1;
         } while (++exponent < 0);
     }
-#else
-    // The following code presumes that the underlying floating point system handles
-    // overflow conditions and subnormal numbers that may be the result of a conversion.  
-    float f = (float)d;
-    if (d != f) {
-        // "Lost in translation".  Stick to float64.
-        goto done;
-    }
 #endif
 
     // Yes, the number is compatible with 32-bit float representation.
 
     tag = MT_FLOAT32;
-#ifndef PLATFORM_SUPPORTS_FLOAT_CAST
+#ifdef PLATFORM_SUPPORTS_FLOAT_CAST
+    uint32_t floatBinary;
+    memcpy(&floatBinary, &f, sizeof(float));
+    bitFormat = floatBinary;
+#else
     bitFormat =
         // Put sign bit in position.
         ((bitFormat >> (64 - 32)) & FLOAT32_NEG_ZERO) +
@@ -136,10 +140,6 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
         (exponent << FLOAT32_SIGNIFICAND_SIZE) +
         // Significand.
         significand;
-#else
-    uint32_t floatBinary;
-    memcpy(&floatBinary, &f, sizeof(float));
-    bitFormat = floatBinary;
 #endif
 
     // However, the number could potentially fit in a 16-bit float as well.

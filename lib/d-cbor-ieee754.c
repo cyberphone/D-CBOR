@@ -39,6 +39,7 @@ static const int MT_FLOAT64 = 0xfb;
 void addDouble(CBOR_BUFFER *cborBuffer, double d) {
 
     // Initial assumption: the number is a plain vanilla 64-bit double.
+ 
     int tag = MT_FLOAT64;
     uint64_t bitFormat;
     memcpy(&bitFormat, &d, sizeof(uint64_t));
@@ -62,7 +63,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
         goto done;
     }
 
-    // It is apparently a regular number. Does it fit in a 32-bit float?
+    // It must be a "regular" number. Does it fit in a 32-bit float?
 
 #ifndef PLATFORM_SUPPORTS_FLOAT_CAST
     int64_t exponent = 
@@ -100,12 +101,13 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
     // overflow conditions and subnormal numbers that may be the result of a conversion.  
     float f = (float)d;
     if (d != f) {
-        // After casting to float32 something got lost.  Stick to float64.
+        // "Lost in translation".  Stick to float64.
         goto done;
     }
 #endif
 
     // Yes, the number is compatible with 32-bit float representation.
+
     tag = MT_FLOAT32;
 #ifndef PLATFORM_SUPPORTS_FLOAT_CAST
     bitFormat =
@@ -161,6 +163,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
     }
 
     // Seems like 16 bits indeed are sufficient!
+
     tag = MT_FLOAT16;
     bitFormat =
         // Put sign bit in position.

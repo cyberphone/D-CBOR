@@ -86,3 +86,18 @@ void addArray(CBOR_BUFFER* cborBuffer, int elements) {
 void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
+
+#ifdef INDEFINITE_LENGTH_EMULATION
+void insertArray(CBOR_BUFFER* cborBuffer, int savePos, int elements) {
+    int lastPos = cborBuffer->pos;
+    addArray(cborBuffer, elements);
+    if (cborBuffer->length) {
+        uint8_t buffer[5];  // 2^32 - 1 elements is not sufficient?
+        int q = cborBuffer->pos - lastPos;  // Length in bytes of the array object.
+        // Put the array object in front of its associated array elements.
+        memmove(buffer, &cborBuffer->data[lastPos], q);
+        memmove(&cborBuffer->data[savePos + q], &cborBuffer->data[savePos], lastPos - savePos);
+        memmove(&cborBuffer->data[savePos], buffer, q);
+    }
+}
+#endif

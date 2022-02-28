@@ -2,6 +2,9 @@
 
 #include "../lib/d-cbor.h"
 
+#ifndef CBOR_NO_DOUBLE
+#include <math.h>
+#endif
 // For demonstration purposes only...
 #include <stdio.h>
 void printCborBuffer(CBOR_BUFFER *cborBuffer) {
@@ -46,19 +49,30 @@ void main() {
       addInt(&cborBuffer, 2);  // key: 2
       addBstr(&cborBuffer, blob2, sizeof(blob2));
       addInt(&cborBuffer, 3);  // key: 3
+#ifdef INDEFINITE_LENGTH_EMULATION
+      int savePos = cborBuffer.pos;
+#else
       addArray(&cborBuffer, 3);  // [#,#,#]
+#endif
         addInt(&cborBuffer, 9223372036854775807l);
         addInt(&cborBuffer, -523);
         addTstr(&cborBuffer, "Hello D-CBOR world!");
-      addInt(&cborBuffer, 4);  // key: 4
+#ifdef INDEFINITE_LENGTH_EMULATION
+      insertArray(&cborBuffer, savePos, 3);
+#endif
+        addInt(&cborBuffer, 4);  // key: 4
       addRawBytes(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
 #ifndef CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
-      addArray(&cborBuffer, 4);  // [#,#,#,#]
+      addArray(&cborBuffer, 8);  // [#,#,#,#,#,#,#,#]
       addDouble(&cborBuffer, 35.6);
       addDouble(&cborBuffer, 3.4028234663852886e+38);
       addDouble(&cborBuffer, -3.4028234663852889e+38);
       addDouble(&cborBuffer, 5.9604644775390625e-8);
+      addDouble(&cborBuffer, 0.0);
+      addDouble(&cborBuffer, -0.0);
+      addDouble(&cborBuffer, NAN);
+      addDouble(&cborBuffer, INFINITY);
 #endif
 
     // Do something with the generated CBOR.

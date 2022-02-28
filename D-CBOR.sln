@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3DF1739-37BB-4A7E-81EE-910C9BFE8D77}"
 	ProjectSection(SolutionItems) = preProject
+		d-cbor-4-constrained-device\d-cbor-4-constrained-device.hex = d-cbor-4-constrained-device\d-cbor-4-constrained-device.hex
 		d-cbor-4-constrained-devices.md = d-cbor-4-constrained-devices.md
 		README.md = README.md
 	EndProjectSection

@@ -26,3 +26,7 @@ void encodeTagAndValue(CBOR_BUFFER* cborBuffer, int tag, int length, uint64_t va
 // Note: the implementation is in "ieee754.c"
 void addDouble(CBOR_BUFFER* cborBuffer, double value);
 #endif
+
+#ifdef INDEFINITE_LENGTH_EMULATION
+void insertArray(CBOR_BUFFER* cborBuffer, int savePos, int elements);
+#endif

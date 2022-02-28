@@ -60,19 +60,19 @@ void main() {
 #ifdef INDEFINITE_LENGTH_EMULATION
       insertArray(&cborBuffer, savePos, 3);
 #endif
-        addInt(&cborBuffer, 4);  // key: 4
+      addInt(&cborBuffer, 4);  // key: 4
       addRawBytes(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
 #ifndef CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
       addArray(&cborBuffer, 8);  // [#,#,#,#,#,#,#,#]
-      addDouble(&cborBuffer, 35.6);
-      addDouble(&cborBuffer, 3.4028234663852886e+38);
-      addDouble(&cborBuffer, -3.4028234663852889e+38);
-      addDouble(&cborBuffer, 5.9604644775390625e-8);
-      addDouble(&cborBuffer, 0.0);
-      addDouble(&cborBuffer, -0.0);
-      addDouble(&cborBuffer, NAN);
-      addDouble(&cborBuffer, INFINITY);
+        addDouble(&cborBuffer, 35.6);
+        addDouble(&cborBuffer, 3.4028234663852886e+38);
+        addDouble(&cborBuffer, -3.4028234663852889e+38);
+        addDouble(&cborBuffer, 5.9604644775390625e-8);
+        addDouble(&cborBuffer, 0.0);
+        addDouble(&cborBuffer, -0.0);
+        addDouble(&cborBuffer, NAN);
+        addDouble(&cborBuffer, INFINITY);
 #endif
 
     // Do something with the generated CBOR.

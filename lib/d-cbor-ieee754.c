@@ -4,37 +4,37 @@
 
 #include "d-cbor.h"
 
-const int FLOAT16_SIGNIFICAND_SIZE = 10;
-const int FLOAT32_SIGNIFICAND_SIZE = 23;
-const int FLOAT64_SIGNIFICAND_SIZE = 52;
+static const int FLOAT16_SIGNIFICAND_SIZE = 10;
+static const int FLOAT32_SIGNIFICAND_SIZE = 23;
+static const int FLOAT64_SIGNIFICAND_SIZE = 52;
 
-const int FLOAT16_EXPONENT_SIZE = 5;
-const int FLOAT32_EXPONENT_SIZE = 8;
-const int FLOAT64_EXPONENT_SIZE = 11;
+static const int FLOAT16_EXPONENT_SIZE = 5;
+static const int FLOAT32_EXPONENT_SIZE = 8;
+static const int FLOAT64_EXPONENT_SIZE = 11;
 
-const int FLOAT16_EXPONENT_BIAS = 15;
-const int FLOAT32_EXPONENT_BIAS = 127;
-const int FLOAT64_EXPONENT_BIAS = 1023;
+static const int FLOAT16_EXPONENT_BIAS = 15;
+static const int FLOAT32_EXPONENT_BIAS = 127;
+static const int FLOAT64_EXPONENT_BIAS = 1023;
 
-const uint64_t FLOAT16_NOT_A_NUMBER = 0x0000000000007e00ul;
-const uint64_t FLOAT16_POS_INFINITY = 0x0000000000007c00ul;
-const uint64_t FLOAT16_NEG_INFINITY = 0x000000000000fc00ul;
-const uint64_t FLOAT16_POS_ZERO     = 0x0000000000000000ul;
-const uint64_t FLOAT16_NEG_ZERO     = 0x0000000000008000ul;
+static const uint64_t FLOAT16_NOT_A_NUMBER = 0x0000000000007e00ul;
+static const uint64_t FLOAT16_POS_INFINITY = 0x0000000000007c00ul;
+static const uint64_t FLOAT16_NEG_INFINITY = 0x000000000000fc00ul;
+static const uint64_t FLOAT16_POS_ZERO     = 0x0000000000000000ul;
+static const uint64_t FLOAT16_NEG_ZERO     = 0x0000000000008000ul;
 
-const uint64_t FLOAT32_NEG_ZERO     = 0x0000000080000000ul;
+static const uint64_t FLOAT32_NEG_ZERO     = 0x0000000080000000ul;
 
-const uint64_t FLOAT64_NOT_A_NUMBER = 0x7ff8000000000000ul;
-const uint64_t FLOAT64_POS_INFINITY = 0x7ff0000000000000ul;
-const uint64_t FLOAT64_NEG_INFINITY = 0xfff0000000000000ul;
-const uint64_t FLOAT64_POS_ZERO     = 0x0000000000000000ul;
-const uint64_t FLOAT64_NEG_ZERO     = 0x8000000000000000ul;
+static const uint64_t FLOAT64_NOT_A_NUMBER = 0x7ff8000000000000ul;
+static const uint64_t FLOAT64_POS_INFINITY = 0x7ff0000000000000ul;
+static const uint64_t FLOAT64_NEG_INFINITY = 0xfff0000000000000ul;
+static const uint64_t FLOAT64_POS_ZERO     = 0x0000000000000000ul;
+static const uint64_t FLOAT64_NEG_ZERO     = 0x8000000000000000ul;
 
-const uint64_t ONE                  = 0x0000000000000001ul;
+static const uint64_t ONE                  = 0x0000000000000001ul;
 
-const int MT_FLOAT16 = 0xf9;
-const int MT_FLOAT32 = 0xfa;
-const int MT_FLOAT64 = 0xfb;
+static const int MT_FLOAT16 = 0xf9;
+static const int MT_FLOAT32 = 0xfa;
+static const int MT_FLOAT64 = 0xfb;
 
 void addDouble(CBOR_BUFFER *cborBuffer, double d) {
 

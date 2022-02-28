@@ -96,6 +96,8 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
         } while (++exponent < 0);
     }
 #else
+    // The following code presumes that the underlying floating point system handles
+    // overflow conditions and subnormal numbers that may be the result of a conversion.  
     float f = (float)d;
     if (d != f) {
         // After casting to float32 something got lost.  Stick to float64.

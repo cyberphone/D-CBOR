@@ -110,7 +110,7 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
 void insertArray(CBOR_BUFFER* cborBuffer, int savePos, int elements) {
     int lastPos = cborBuffer->pos;
     addArray(cborBuffer, elements);
-    if (cborBuffer->length) {
+    if (cborBuffer->length) {  // Buffer overflow protection.
         uint8_t buffer[5];  // 2^32 - 1 elements is not sufficient?
         int q = cborBuffer->pos - lastPos;  // Length in bytes of the array object.
         // Put the array object in front of its associated array elements.

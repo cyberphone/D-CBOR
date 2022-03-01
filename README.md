@@ -59,6 +59,11 @@ __A:__ Absolutely! Take a look at
 [d-cbor-4-constrained-devices.md](d-cbor-4-constrained-devices.md)
 for more details.
 
+__Q:__ If you don't know in advance how many elements there will be in
+an array, you can't use D-CBOR, right?<br>
+__A:__ This scenario is addressed by fixups which in most cases
+can replace indefinite-length encoding.
+
 __Q:__ Home does _reencoding_ come into the picture?<br>
 __A:__ If you use cryptographic constructs like enveloped signatures
 or certain variants of authenticated encryption, data must stay
@@ -67,8 +72,8 @@ steps mandated by such schemes.
 D-CBOR enables this without wrapping data in `bstr` or `base64url`.
 
 __Q:__ Does D-CBOR affect decoders?<br>
-__A:__ Yes, advanced decoder/encoder designs typically use a single
-class to represent a specific type.  Deterministic serialization makes
+__A:__ Yes, advanced decoder/encoder designs typically use a _single
+class to represent a specific data type_.  Deterministic serialization makes
 instances of such objects behave identically,
 regardless if they are created programmatically or are the
 result of a decoding process.

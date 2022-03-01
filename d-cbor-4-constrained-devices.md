@@ -13,11 +13,12 @@ A fair assumption is that constrained devices also come with equally
 constrained vocabularies and only use a small set of data types.
 
 The following example (which probably is pretty close to how TPMs currently
-are programmed), deploys methods that put very modest requirements on the
+are programmed), deploys methods that put very modest requirements on a
 CBOR encoder:
 
 - Precomputed CBOR data
 - Prearranged map key ordering and array sizing
+- Optionally using "[fixups](#ghghg)"
 
 These methods also consume very limited amounts of RAM beyond the actual
 CBOR output buffer.
@@ -166,6 +167,40 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
 ```
+### Handling Indefinite-Length Data
+In some cases it may not be possible to in _advance_ determine
+how many items there will be in an array.  This can be dealt with
+while maintaining strict D-CBOR compatibility by using "fixups".
+Consider the following extension to the sample encoder:
+```c
+void insertArray(CBOR_BUFFER* cborBuffer, int savePos, int elements) {
+    int lastPos = cborBuffer->pos;
+    addArray(cborBuffer, elements);
+    if (cborBuffer->length) {  // Buffer overflow protection.
+        uint8_t buffer[5];  // 2^32 - 1 elements is not sufficient?
+        int q = cborBuffer->pos - lastPos;  // Length in bytes of the array object.
+        // Put the array object in front of its associated array elements.
+        memmove(buffer, &cborBuffer->data[lastPos], q);
+        memmove(&cborBuffer->data[savePos + q], &cborBuffer->data[savePos], lastPos - savePos);
+        memmove(&cborBuffer->data[savePos], buffer, q);
+    }
+}
+```
+Then indefinite-length arrays would be handled like this:
+```c
+    // Save current buffer position:
+    int savePos = cborBuffer.pos;
+      add*(&cborBuffer, /* data */);
+      add*(&cborBuffer, /* data */);
+      add*(&cborBuffer, /* data */);
+
+      // Etc.
+
+    // After reaching end of input:
+    insertArray(&cborBuffer, savePos, /* number of elements */);
+```
+Similar techniques can be applied to indefinte-length strings as well.
+
 ### Running the Example
 The optional floating point encoder resides in a separate file:
 [lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).

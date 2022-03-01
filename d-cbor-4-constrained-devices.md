@@ -18,7 +18,7 @@ CBOR encoder:
 
 - Precomputed CBOR data
 - Prearranged map key ordering and array sizing
-- Optionally using "[fixups](#ghghg)"
+- Optionally using "[fixups](#handling-indefinite-length-data)"
 
 These methods also consume very limited amounts of RAM beyond the actual
 CBOR output buffer.
@@ -202,8 +202,8 @@ Then indefinite-length arrays would be handled like this:
 Similar techniques can be applied to indefinte-length strings as well.
 
 ### Running the Example
-The optional floating point encoder resides in a separate file:
-[lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).
-
 A runnable version of this example can be found in:
 [d-cbor-4-constrained-device](d-cbor-4-constrained-device).
+
+The optional floating point encoder resides in a separate file:
+[lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).

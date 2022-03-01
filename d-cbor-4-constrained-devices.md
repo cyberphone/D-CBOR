@@ -166,9 +166,9 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
 ```
-## Running the Example
+### Running the Example
 The optional floating point encoder resides in a separate file:
-https://github.com/cyberphone/D-CBOR/blob/main/lib/d-cbor-ieee754.c.
+[lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).
 
 A runnable version of this example can be found in:
-https://github.com/cyberphone/D-CBOR/blob/main/d-cbor-4-constrained-device.
+[d-cbor-4-constrained-device](d-cbor-4-constrained-device).

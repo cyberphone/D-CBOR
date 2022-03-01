@@ -89,7 +89,7 @@ Actual encoder:
 
 #include "d-cbor.h"
 
-const uint64_t MASK_LOWER_32 = 0x00000000fffffffful;
+static const uint64_t MASK_LOWER_32 = 0x00000000fffffffful;
 
 static const int MT_UNSIGNED      = 0x00;
 static const int MT_NEGATIVE      = 0x20;

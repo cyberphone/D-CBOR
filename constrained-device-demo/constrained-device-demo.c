@@ -1,4 +1,4 @@
-// d-cbor-4-constrained-device.c
+// constrained-device-demo.c
 
 #include "d-cbor.h"
 

@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3DF1739-37BB-4A7E-81EE-910C9BFE8D77}"
 	ProjectSection(SolutionItems) = preProject
-		d-cbor-4-constrained-device\build-and-run.bash = d-cbor-4-constrained-device\build-and-run.bash
-		d-cbor-4-constrained-device\d-cbor-4-constrained-device.hex = d-cbor-4-constrained-device\d-cbor-4-constrained-device.hex
+		constrained-device-demo\build-and-run.bash = constrained-device-demo\build-and-run.bash
+		constrained-device-demo\constrained-device-demo.hex = constrained-device-demo\constrained-device-demo.hex
 		d-cbor-4-constrained-devices.md = d-cbor-4-constrained-devices.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d-cbor-4-constrained-device", "d-cbor-4-constrained-device\d-cbor-4-constrained-device.vcxproj", "{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "constrained-device-demo", "constrained-device-demo\constrained-device-demo.vcxproj", "{40458A06-9E6D-473A-8BBD-74DEA07A4697}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +21,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Debug|x64.ActiveCfg = Debug|x64
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Debug|x64.Build.0 = Debug|x64
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Debug|x86.ActiveCfg = Debug|Win32
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Debug|x86.Build.0 = Debug|Win32
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Release|x64.ActiveCfg = Release|x64
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Release|x64.Build.0 = Release|x64
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Release|x86.ActiveCfg = Release|Win32
-		{3B17EA8C-DAC3-4016-942D-9F18A9DEB090}.Release|x86.Build.0 = Release|Win32
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Debug|x64.ActiveCfg = Debug|x64
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Debug|x64.Build.0 = Debug|x64
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Debug|x86.ActiveCfg = Debug|Win32
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Debug|x86.Build.0 = Debug|Win32
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Release|x64.ActiveCfg = Release|x64
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Release|x64.Build.0 = Release|x64
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Release|x86.ActiveCfg = Release|Win32
+		{40458A06-9E6D-473A-8BBD-74DEA07A4697}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

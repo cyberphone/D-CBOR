@@ -203,7 +203,7 @@ Similar techniques can be applied to indefinte-length strings as well.
 
 ### Running the Example
 A runnable version of this example can be found in:
-[d-cbor-4-constrained-device](d-cbor-4-constrained-device).
+[constrained-device-demo](constrained-device-demo).
 
 The optional floating point encoder resides in a separate file:
 [lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).

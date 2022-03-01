@@ -25,13 +25,13 @@ CBOR output buffer.
 #include "d-cbor.h"
 
 // ["precomputed rocks", true]
-const uint8_t precomputedCbor[] = { 
+static const uint8_t precomputedCbor[] = { 
     0x82, 0x71, 0x70, 0x72, 0x65, 0x63, 0x6f, 0x6d, 0x70, 0x75, 
     0x74, 0x65, 0x64, 0x20, 0x72, 0x6f, 0x63, 0x6b, 0x73, 0xf5 };
 
 // A couple of blob objects
-const uint8_t blob1[100] = { 4, 6, 7, 8, 9, 10 };
-const uint8_t blob2[]    = { -1, 5 };
+static const uint8_t blob1[100] = { 4, 6, 7, 8, 9, 10 };
+static const uint8_t blob2[]    = { -1, 5 };
 
 #define BUFFER_SIZE 300
 
@@ -63,10 +63,10 @@ void main() {
 #ifndef CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
       addArray(&cborBuffer, 4);  // [#,#,#,#]
-      addDouble(&cborBuffer, 35.6);
-      addDouble(&cborBuffer, 3.4028234663852886e+38);
-      addDouble(&cborBuffer, -3.4028234663852889e+38);
-      addDouble(&cborBuffer, 5.9604644775390625e-8);
+        addDouble(&cborBuffer, 35.6);
+        addDouble(&cborBuffer, 3.4028234663852886e+38);
+        addDouble(&cborBuffer, -3.4028234663852889e+38);
+        addDouble(&cborBuffer, 5.9604644775390625e-8);
 #endif
 
     // Now do something with the generated CBOR...
@@ -91,12 +91,12 @@ Actual encoder:
 
 const uint64_t MASK_LOWER_32 = 0x00000000fffffffful;
 
-const int MT_UNSIGNED      = 0x00;
-const int MT_NEGATIVE      = 0x20;
-const int MT_BYTE_STRING   = 0x40;
-const int MT_TEXT_STRING   = 0x60;
-const int MT_ARRAY         = 0x80;
-const int MT_MAP           = 0xa0;
+static const int MT_UNSIGNED      = 0x00;
+static const int MT_NEGATIVE      = 0x20;
+static const int MT_BYTE_STRING   = 0x40;
+static const int MT_TEXT_STRING   = 0x60;
+static const int MT_ARRAY         = 0x80;
+static const int MT_MAP           = 0xa0;
 
 static void putByte(CBOR_BUFFER *cborBuffer, uint8_t byte) {
     if (cborBuffer->pos >= cborBuffer->length) {
@@ -166,8 +166,9 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
 ```
+## Running the Example
 The optional floating point encoder resides in a separate file:
-https://github.com/cyberphone/D-CBOR/blob/main/lib/ieee754.c.
+https://github.com/cyberphone/D-CBOR/blob/main/lib/d-cbor-ieee754.c.
 
 A runnable version of this example can be found in:
-https://github.com/cyberphone/D-CBOR/blob/main/d-cbor-4-constrained-device/d-cbor-4-constrained-device.c.
+https://github.com/cyberphone/D-CBOR/blob/main/d-cbor-4-constrained-device.

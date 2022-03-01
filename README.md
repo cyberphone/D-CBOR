@@ -61,8 +61,9 @@ for more details.
 
 __Q:__ If you don't know in advance how many elements there will be in
 an array, you can't use D-CBOR, right?<br>
-__A:__ This scenario is addressed by fixups which in most cases
-can replace indefinite-length encoding.
+__A:__ This scenario is addressed by
+"[fixups](d-cbor-4-constrained-devices.md#handling-indefinite-length-data)"
+which in _most_ cases can replace indefinite-length encoding.
 
 __Q:__ Home does _reencoding_ come into the picture?<br>
 __A:__ If you use cryptographic constructs like enveloped signatures

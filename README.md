@@ -46,13 +46,17 @@ even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
 
+### Constraints
+To be supplied
+
 ### Internet Draft
 To be supplied
 
 ### FAQ
 __Q:__ Is D-CBOR a redefined CBOR?<br>
-__A:__ No, D-CBOR is 100% compatible with RFC8949 but
-imposes certain restrictions in order to achieve the stated goals.
+__A:__ No, D-CBOR is 100% compatible with
+[RFC8949](https://www.rfc-editor.org/rfc/rfc8949.html)
+but imposes certain restrictions in order to achieve the stated goals.
 
 __Q:__ Is D-CBOR usable with constrained devices?<br>
 __A:__ Absolutely! Take a look at 

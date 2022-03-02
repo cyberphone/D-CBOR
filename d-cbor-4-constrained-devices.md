@@ -45,11 +45,7 @@ void main() {
     cborBuffer.pos = 0;
 
     // Generate deterministic CBOR using prearranged structures.
-#ifndef CBOR_NO_DOUBLE
     addMap(&cborBuffer, 5);  // {#,#,#,#,#}
-#else
-    addMap(&cborBuffer, 4);  // {#,#,#,#}
-#endif
       addInt(&cborBuffer, 1);  // key: 1
       addBstr(&cborBuffer, blob1, sizeof(blob1));
       addInt(&cborBuffer, 2);  // key: 2
@@ -61,14 +57,12 @@ void main() {
         addTstr(&cborBuffer, "Hello D-CBOR world!");
       addInt(&cborBuffer, 4);  // key: 4
       addRawBytes(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
-#ifndef CBOR_NO_DOUBLE
       addInt(&cborBuffer, 5);  // key: 5
       addArray(&cborBuffer, 4);  // [#,#,#,#]
         addDouble(&cborBuffer, 35.6);
         addDouble(&cborBuffer, 3.4028234663852886e+38);
         addDouble(&cborBuffer, -3.4028234663852889e+38);
         addDouble(&cborBuffer, 5.9604644775390625e-8);
-#endif
 
     // Now do something with the generated CBOR...
 }

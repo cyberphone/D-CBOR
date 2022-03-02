@@ -93,6 +93,8 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
         goto done;
     }
 #else
+    // The following code requires no support for floating point conversions,
+    // it only uses integer operations.
     int64_t exponent = 
         ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) & ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
         (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);

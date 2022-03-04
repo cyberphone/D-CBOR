@@ -184,14 +184,14 @@ Then indefinite-length arrays would be handled like this:
 ```c
     // Save current buffer position:
     int savePos = cborBuffer.pos;
-      add*(&cborBuffer, /* data */);
-      add*(&cborBuffer, /* data */);
-      add*(&cborBuffer, /* data */);
+      add*(&cborBuffer, /* array element */);
+      add*(&cborBuffer, /* array element */);
+      add*(&cborBuffer, /* array element */);
 
       // Etc.
 
     // After reaching end of input:
-    insertArray(&cborBuffer, savePos, /* number of elements */);
+    insertArray(&cborBuffer, savePos, /* number of array elements found */);
 ```
 Similar techniques can be applied to indefinte-length strings as well.
 
@@ -199,5 +199,5 @@ Similar techniques can be applied to indefinte-length strings as well.
 A runnable version of this example can be found in:
 [constrained-device-demo](constrained-device-demo).
 
-The optional floating point encoder resides in a separate file:
+The floating point encoder resides in a separate file:
 [lib/d-cbor-ieee754.c](lib/d-cbor-ieee754.c).

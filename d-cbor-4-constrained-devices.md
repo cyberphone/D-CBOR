@@ -31,8 +31,8 @@ static const uint8_t precomputedCbor[] = {
     0x74, 0x65, 0x64, 0x20, 0x72, 0x6f, 0x63, 0x6b, 0x73, 0xf5 };
 
 // A couple of blob objects
-static const uint8_t blob1[100] = { 4, 6, 7, 8, 9, 10 };
-static const uint8_t blob2[]    = { -1, 5 };
+static const uint8_t blob1[40] = { 4, 6, 7, 8, 9, 10, 'C', 'B', 'O', 'R'};
+static const uint8_t blob2[]   = { -1, 5 };
 
 #define BUFFER_SIZE 300
 

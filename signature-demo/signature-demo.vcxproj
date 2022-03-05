@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{40458a06-9e6d-473a-8bbd-74dea07a4697}</ProjectGuid>
-    <RootNamespace>constraineddevicedemo</RootNamespace>
+    <ProjectGuid>{f0fe8884-d82a-4d41-93ce-acb9dc1709eb}</ProjectGuid>
+    <RootNamespace>signaturedemo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/I ..\lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/I ..\lib /I ed25519\src %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,13 +140,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\lib\d-cbor.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\lib\d-cbor-ieee754.c" />
     <ClCompile Include="..\lib\d-cbor.c" />
     <ClCompile Include="..\lib\print-buffer.c" />
-    <ClCompile Include="constrained-device-demo.c" />
+    <ClCompile Include="ed25519\src\add_scalar.c" />
+    <ClCompile Include="ed25519\src\fe.c" />
+    <ClCompile Include="ed25519\src\ge.c" />
+    <ClCompile Include="ed25519\src\keypair.c" />
+    <ClCompile Include="ed25519\src\key_exchange.c" />
+    <ClCompile Include="ed25519\src\sc.c" />
+    <ClCompile Include="ed25519\src\seed.c" />
+    <ClCompile Include="ed25519\src\sha512.c" />
+    <ClCompile Include="ed25519\src\sign.c" />
+    <ClCompile Include="ed25519\src\verify.c" />
+    <ClCompile Include="signature-demo.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lib\d-cbor.h" />
+    <ClInclude Include="ed25519\src\ed25519.h" />
+    <ClInclude Include="ed25519\src\fe.h" />
+    <ClInclude Include="ed25519\src\fixedint.h" />
+    <ClInclude Include="ed25519\src\ge.h" />
+    <ClInclude Include="ed25519\src\precomp_data.h" />
+    <ClInclude Include="ed25519\src\sc.h" />
+    <ClInclude Include="ed25519\src\sha512.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

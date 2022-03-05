@@ -22,6 +22,8 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys);
 
 void encodeTagAndValue(CBOR_BUFFER* cborBuffer, int tag, int length, uint64_t value);
 
+void printCborBuffer(CBOR_BUFFER* cborBuffer);
+
 #ifndef CBOR_NO_DOUBLE
 // Note: the implementation is in "ieee754.c"
 void addDouble(CBOR_BUFFER* cborBuffer, double value);

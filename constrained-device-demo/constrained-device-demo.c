@@ -5,19 +5,6 @@
 #ifndef CBOR_NO_DOUBLE
 #include <math.h>
 #endif
-// For demonstration purposes only...
-#include <stdio.h>
-void printCborBuffer(CBOR_BUFFER *cborBuffer) {
-    if (cborBuffer->length) {
-        printf("length=%d\n", cborBuffer->pos);
-        for (int i = 0; i < cborBuffer->pos; i++) {
-            printf("%02x", (int)cborBuffer->data[i]);
-        }
-    } else {
-        printf("Buffer overflow");
-    }
-    printf("\n");
-}
 
 // ["precomputed rocks", true]
 static const uint8_t precomputedCbor[] = { 

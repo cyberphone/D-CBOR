@@ -77,7 +77,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
         tag = MT_FLOAT16;
         bitFormat = (bitFormat == FLOAT64_POS_INFINITY) ?
             FLOAT16_POS_INFINITY : (bitFormat == FLOAT64_NEG_INFINITY) ?
-                // Deterministic representation of NaN => No NaN "signaling".
+                // Deterministic representation of NaN => Only "quiet" NaN is supported.
                 FLOAT16_NEG_INFINITY : FLOAT16_NOT_A_NUMBER;
         goto done;
     }

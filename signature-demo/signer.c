@@ -42,7 +42,7 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
     addInt(cborBuffer, key);
     // Remember to update map size after the signature has been added.
     int signatureContainerMap = cborBuffer->pos;
-    // Intially there are only 2 elements in the outer map.
+    // Intially there are only 2 elements in the core signature map.
     addMap(cborBuffer, 2);
       // COSE algorithm EdDSA but in CSF and FIDO treated as Ed25519.
       addMappedInt(cborBuffer, CSF_ALGORITHM_LABEL, COSE_EDDSA_ALG);
@@ -74,6 +74,6 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
     // Finally, add the signature blob itself.
     addMappedBstr(cborBuffer, CSF_SIGNATURE_LABEL, signature, sizeof(signature));
     // This may look suspicious but the number of CSF map elements never goes
-    // above 5 and the signature blob represents a new entry in the outer map.
+    // above 5 and the signature blob represents a new entry in the signature map.
     cborBuffer->data[signatureContainerMap]++;
 }

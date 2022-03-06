@@ -23,15 +23,16 @@ CBOR encoder:
 These methods also consume very limited amounts of RAM beyond the actual
 CBOR output buffer.
 ```c
-#include "d-cbor.h"
+#include <d-cbor.h>
 
 // ["precomputed rocks", true]
-static const uint8_t precomputedCbor[] = { 
-    0x82, 0x71, 0x70, 0x72, 0x65, 0x63, 0x6f, 0x6d, 0x70, 0x75, 
-    0x74, 0x65, 0x64, 0x20, 0x72, 0x6f, 0x63, 0x6b, 0x73, 0xf5 };
+static const uint8_t precomputedCbor[] = {
+    0x82, 0x71, 0x70, 0x72, 0x65, 0x63, 0x6f, 0x6d, 0x70, 0x75,
+    0x74, 0x65, 0x64, 0x20, 0x72, 0x6f, 0x63, 0x6b, 0x73, 0xf5
+};
 
 // A couple of blob objects
-static const uint8_t blob1[40] = { 4, 6, 7, 8, 9, 10, 'C', 'B', 'O', 'R'};
+static const uint8_t blob1[40] = { 4, 6, 7, 8, 9, 10, 'C', 'B', 'O', 'R' };
 static const uint8_t blob2[]   = { -1, 5 };
 
 #define BUFFER_SIZE 300
@@ -46,15 +47,13 @@ void main() {
 
     // Generate deterministic CBOR using prearranged structures.
     addMap(&cborBuffer, 5);  // {#,#,#,#,#}
-      addInt(&cborBuffer, 1);  // key: 1
-      addBstr(&cborBuffer, blob1, sizeof(blob1));
-      addInt(&cborBuffer, 2);  // key: 2
-      addBstr(&cborBuffer, blob2, sizeof(blob2));
+      addMappedBstr(&cborBuffer, 1, blob1, sizeof(blob1));  // Key: 1
+      addMappedBstr(&cborBuffer, 2, blob2, sizeof(blob2));  // Key: 2
       addInt(&cborBuffer, 3);  // key: 3
-      addArray(&cborBuffer, 3);  // [#,#,#]
-        addInt(&cborBuffer, 9223372036854775807l);
-        addInt(&cborBuffer, -523);
-        addTstr(&cborBuffer, "Hello D-CBOR world!");
+        addArray(&cborBuffer, 3);  // [#,#,#]
+          addInt(&cborBuffer, 9223372036854775807l);
+          addInt(&cborBuffer, -523);
+          addTstr(&cborBuffer, "Hello D-CBOR world!");
       addInt(&cborBuffer, 4);  // key: 4
       addRawBytes(&cborBuffer, precomputedCbor, sizeof(precomputedCbor));
       addInt(&cborBuffer, 5);  // key: 5
@@ -64,7 +63,7 @@ void main() {
         addDouble(&cborBuffer, -3.4028234663852889e+38);
         addDouble(&cborBuffer, 5.9604644775390625e-8);
 
-    // Now do something with the generated CBOR...
+    // Do something with the generated CBOR.
 }
 ```
 ### Compatible Encoder Sample
@@ -159,6 +158,21 @@ void addArray(CBOR_BUFFER* cborBuffer, int elements) {
 
 void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
+}
+
+void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value) {
+    addInt(cborBuffer, key);
+    addInt(cborBuffer, value);
+}
+
+void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* utf8String) {
+    addInt(cborBuffer, key);
+    addTstr(cborBuffer, utf8String);
+}
+
+void addMappedBstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* byteString, int length) {
+    addInt(cborBuffer, key);
+    addBstr(cborBuffer, byteString, length);
 }
 ```
 ### Handling Indefinite-Length Data

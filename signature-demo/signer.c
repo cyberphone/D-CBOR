@@ -19,19 +19,19 @@ static const uint8_t PUBLIC_KEY[] = {
 };
 
 // CSF (CBOR Signature Format)
-static const int CSF_ALGORITHM_LABEL = 1;
-static const int CSF_KEY_ID_LABEL    = 3;
-static const int CSF_PUBLIC_KEY_LABEL= 4;
-static const int CSF_SIGNATURE_LABEL = 7;
+static const int CSF_ALGORITHM_LABEL  = 1;
+static const int CSF_KEY_ID_LABEL     = 3;
+static const int CSF_PUBLIC_KEY_LABEL = 4;
+static const int CSF_SIGNATURE_LABEL  = 7;
 
 // COSE
-static const int COSE_KEY_TYPE_LABEL = 1;
-static const int COSE_OKP_X_LABEL    = -2;
-static const int COSE_OKP_CRV_LABEL  = -1;
+static const int COSE_KEY_TYPE_LABEL  = 1;
+static const int COSE_OKP_X_LABEL     = -2;
+static const int COSE_OKP_CRV_LABEL   = -1;
 
-static const int COSE_KEY_TYPE_OKP   = 1;
-static const int COSE_EDDSA_ALG      = -8;  // See note in the code...
-static const int COSE_CRV_ED25519    = 6;
+static const int COSE_KEY_TYPE_OKP    = 1;
+static const int COSE_EDDSA_ALG       = -8;  // See note in the code...
+static const int COSE_CRV_ED25519     = 6;
 
 
 void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
@@ -74,6 +74,6 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
     // Finally, add the signature blob itself.
     addMappedBstr(cborBuffer, CSF_SIGNATURE_LABEL, signature, sizeof(signature));
     // This may look suspicious but the number of CSF map elements never goes
-    // above 5 and the signature blob represents a new entry in the map.
+    // above 5 and the signature blob represents a new entry in the outer map.
     cborBuffer->data[signatureContainerMap]++;
 }

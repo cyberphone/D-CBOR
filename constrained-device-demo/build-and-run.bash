@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Rudimentary Linux bash script for building and running the D-CBOR demo.
+# Rudimentary Linux bash script for building and running the D-CBOR constrained device demo.
 #
 # Run from any directory: $ bash path-to-this-script
 #

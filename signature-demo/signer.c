@@ -3,8 +3,8 @@
 // Adds a CSF compatible signature to a CBOR map.
 
 #include <d-cbor.h>
-
 #include <ed25519.h>
+#include <stdio.h>
 
 #include "signer.h"
 
@@ -55,10 +55,10 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
         addMappedInt(cborBuffer, COSE_OKP_CRV_LABEL, COSE_CRV_ED25519);
         // X coordinate
         addMappedBstr(cborBuffer, COSE_OKP_X_LABEL, PUBLIC_KEY, sizeof(PUBLIC_KEY));
-      // Finally, the signature itself.
+
+      // Now we have everything in the buffer that is to be signed.
       ed25519_create_keypair(public_key, private_key, PRIVATE_KEY);
       ed25519_sign(signature, cborBuffer->data, cborBuffer->pos, public_key, private_key);
-      // End of signature container.
 
       // For the demo only...
       if (ed25519_verify(signature, cborBuffer->data, cborBuffer->pos, PUBLIC_KEY)) {
@@ -70,9 +70,9 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
       printCborBuffer(cborBuffer);
       // End of that...
 
-    // Add the signature blob itself.
+    // Finally, add the signature blob itself.
     addMappedBstr(cborBuffer, CSF_SIGNATURE_LABEL, signature, sizeof(signature));
     // This may look suspicious but the number of CSF map elements never go above 5.
-    // The signature represents a new entry in the map.
+    // The signature blob represents a new entry in the map.
     cborBuffer->data[signatureContainerMap]++;
 }

@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/I ..\lib /I ed25519\src %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +154,7 @@
     <ClCompile Include="ed25519\src\sign.c" />
     <ClCompile Include="ed25519\src\verify.c" />
     <ClCompile Include="signature-demo.c" />
+    <ClCompile Include="signer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\d-cbor.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="ed25519\src\precomp_data.h" />
     <ClInclude Include="ed25519\src\sc.h" />
     <ClInclude Include="ed25519\src\sha512.h" />
+    <ClInclude Include="signer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

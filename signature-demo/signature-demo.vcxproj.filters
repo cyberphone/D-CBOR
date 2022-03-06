@@ -54,6 +54,9 @@
     <ClCompile Include="..\lib\d-cbor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="signer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ed25519\src\ed25519.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\d-cbor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="signer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

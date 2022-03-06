@@ -24,6 +24,12 @@ void encodeTagAndValue(CBOR_BUFFER* cborBuffer, int tag, int length, uint64_t va
 
 void printCborBuffer(CBOR_BUFFER* cborBuffer);
 
+void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value);
+
+void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* utf8String);
+
+void addMappedBstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* byteString, int length);
+
 #ifndef CBOR_NO_DOUBLE
 // Note: the implementation is in "ieee754.c"
 void addDouble(CBOR_BUFFER* cborBuffer, double value);

@@ -106,6 +106,21 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }
 
+void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value) {
+    addInt(cborBuffer, key);
+    addInt(cborBuffer, value);
+}
+
+void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* utf8String) {
+    addInt(cborBuffer, key);
+    addTstr(cborBuffer, utf8String);
+}
+
+void addMappedBstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* byteString, int length) {
+    addInt(cborBuffer, key);
+    addBstr(cborBuffer, byteString, length);
+}
+
 #ifdef INDEFINITE_LENGTH_EMULATION
 void insertArray(CBOR_BUFFER* cborBuffer, int savePos, int elements) {
     int lastPos = cborBuffer->pos;

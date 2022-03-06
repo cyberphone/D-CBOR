@@ -147,9 +147,7 @@
     <ClCompile Include="ed25519\src\fe.c" />
     <ClCompile Include="ed25519\src\ge.c" />
     <ClCompile Include="ed25519\src\keypair.c" />
-    <ClCompile Include="ed25519\src\key_exchange.c" />
     <ClCompile Include="ed25519\src\sc.c" />
-    <ClCompile Include="ed25519\src\seed.c" />
     <ClCompile Include="ed25519\src\sha512.c" />
     <ClCompile Include="ed25519\src\sign.c" />
     <ClCompile Include="ed25519\src\verify.c" />

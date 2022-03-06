@@ -20,6 +20,7 @@ static const uint8_t PUBLIC_KEY[] = {
 
 // CSF (CBOR Signature Format)
 static const int CSF_ALGORITHM_LABEL = 1;
+static const int CSF_KEY_ID_LABEL    = 3;
 static const int CSF_PUBLIC_KEY_LABEL= 4;
 static const int CSF_SIGNATURE_LABEL = 7;
 
@@ -62,17 +63,17 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
 
       // For the demo only...
       if (ed25519_verify(signature, cborBuffer->data, cborBuffer->pos, PUBLIC_KEY)) {
-          printf("valid signature\n");
+          printf("Valid signature\n");
       }
       else {
-          printf("invalid signature\n");
+          printf("Invalid signature\n");
       }
       printCborBuffer(cborBuffer);
       // End of that...
 
     // Finally, add the signature blob itself.
     addMappedBstr(cborBuffer, CSF_SIGNATURE_LABEL, signature, sizeof(signature));
-    // This may look suspicious but the number of CSF map elements never go above 5.
-    // The signature blob represents a new entry in the map.
+    // This may look suspicious but the number of CSF map elements never goes
+    // above 5 and the signature blob represents a new entry in the map.
     cborBuffer->data[signatureContainerMap]++;
 }

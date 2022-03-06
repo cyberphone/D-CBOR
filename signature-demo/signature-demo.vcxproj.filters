@@ -24,16 +24,10 @@
     <ClCompile Include="ed25519\src\ge.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\key_exchange.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ed25519\src\keypair.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ed25519\src\sc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ed25519\src\seed.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ed25519\src\sha512.c">

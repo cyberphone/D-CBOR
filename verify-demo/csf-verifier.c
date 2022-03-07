@@ -63,9 +63,9 @@ int csfVerifier(QCBORDecodeContext* pCtx, int key) {
       assert(signature.len == 64);
       assert(pCtx->InBuf.cursor == pCtx->InBuf.UB.len);
  
-      // Done with the signature map.  Step out of it.
-      QCBORDecode_ExitMap(pCtx);
-      assert(QCBORDecode_GetError(pCtx) == QCBOR_SUCCESS);
+    // Done with the signature map.  Step out of it.
+    QCBORDecode_ExitMap(pCtx);
+    assert(QCBORDecode_GetError(pCtx) == QCBOR_SUCCESS);
 
     // Finalize the CSF algorithm.
 

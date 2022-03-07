@@ -14,7 +14,7 @@
 static const int CSF_ALGORITHM_LABEL   = 1;
 static const int CSF_KEY_ID_LABEL      = 3;
 static const int CSF_PUBLIC_KEY_LABEL  = 4;
-static const int CSF_SIGNED_CBOR_LABEL = 7;
+static const int CSF_SIGNATURE_LABEL   = 7;
 
 // COSE
 static const int COSE_KEY_TYPE_LABEL   = 1;
@@ -59,7 +59,7 @@ int csfVerifier(QCBORDecodeContext* pCtx, int key) {
       // Retrieve the signature value.
       UsefulBufC signature;
       int beforeSignature = pCtx->InBuf.cursor;
-      QCBORDecode_GetByteStringInMapN(pCtx, CSF_SIGNED_CBOR_LABEL, &signature);
+      QCBORDecode_GetByteStringInMapN(pCtx, CSF_SIGNATURE_LABEL, &signature);
       assert(signature.len == 64);
       assert(pCtx->InBuf.cursor == pCtx->InBuf.UB.len);
  

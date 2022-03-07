@@ -89,8 +89,7 @@ int main(int argc, const char* argv[]) {
     printf("Signature validation result: ");
     if (result) {
         printf("VALID\n");
-    }
-    else {
+    } else {
         printf("***INVALID***\n");
     }
 }

@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\d-cbor-ieee754.c" />
     <ClCompile Include="..\lib\d-cbor.c" />
     <ClCompile Include="..\lib\print-buffer.c" />
     <ClCompile Include="..\ed25519\src\add_scalar.c" />
@@ -152,7 +153,7 @@
     <ClCompile Include="..\ed25519\src\sign.c" />
     <ClCompile Include="..\ed25519\src\verify.c" />
     <ClCompile Include="signature-demo.c" />
-    <ClCompile Include="signer.c" />
+    <ClCompile Include="csf-signer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\d-cbor.h" />

@@ -48,7 +48,10 @@
     <ClCompile Include="..\lib\d-cbor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="signer.c">
+    <ClCompile Include="csf-signer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\d-cbor-ieee754.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

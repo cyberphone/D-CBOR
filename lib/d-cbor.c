@@ -102,6 +102,11 @@ void addArray(CBOR_BUFFER* cborBuffer, int elements) {
     encodeTagAndN(cborBuffer, MT_ARRAY, elements);
 }
 
+void addBool(CBOR_BUFFER* cborBuffer, uint8_t value) {
+    encodeTagAndN(cborBuffer, value ? MT_TRUE : MT_FALSE, 0);
+}
+
+
 void addMap(CBOR_BUFFER* cborBuffer, int keys) {
     encodeTagAndN(cborBuffer, MT_MAP, keys);
 }

@@ -16,7 +16,9 @@ void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length);
 
 void addRawBytes(CBOR_BUFFER* cborBuffer, const uint8_t* bytePointer, int length);
 
-void addArray(CBOR_BUFFER* cborBuffer, int elements);
+void addBool(CBOR_BUFFER* cborBuffer, uint8_t value);
+
+void addArray(CBOR_BUFFER * cborBuffer, int elements);
 
 void addMap(CBOR_BUFFER* cborBuffer, int keys);
 

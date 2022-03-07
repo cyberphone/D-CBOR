@@ -1,4 +1,4 @@
-// signer.c
+// csf-signer.c
 
 // Adds a CSF compatible signature to a CBOR map.
 
@@ -41,7 +41,7 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
     // Set the application specific map key holding the signature.
     addInt(cborBuffer, key);
     // Remember to update map size after the signature has been added.
-    int signatureContainerMap = cborBuffer->pos;
+    int signatureMap = cborBuffer->pos;
     // Intially there are only 2 elements in the core signature map.
     addMap(cborBuffer, 2);
       // COSE algorithm EdDSA but in CSF and FIDO treated as Ed25519.
@@ -75,5 +75,5 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
     addMappedBstr(cborBuffer, CSF_SIGNATURE_LABEL, signature, sizeof(signature));
     // This may look suspicious but the number of CSF map elements never goes
     // above 5 and the signature blob represents a new entry in the signature map.
-    cborBuffer->data[signatureContainerMap]++;
+    if (cborBuffer->length /* overflow check */) cborBuffer->data[signatureMap]++;
 }

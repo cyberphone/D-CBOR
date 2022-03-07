@@ -1,6 +1,6 @@
 // constrained-device-demo.c
 
-#include "d-cbor.h"
+#include <d-cbor.h>
 
 #ifndef CBOR_NO_DOUBLE
 #include <math.h>

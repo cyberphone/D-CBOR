@@ -1,10 +1,15 @@
 // signature-demo.c
 
-#include <d-cbor.h>
+// Minimalist CSF demo using the D-CBOR PoC encoder.
 
+#include <d-cbor.h>
 #include <ed25519.h>
 
 #include "signer.h"
+
+static const int APP_PARAM_ONE_LABEL = 1;
+static const int APP_PARAM_TWO_LABEL = 2;
+static const int APP_SIGNATURE_LABEL = 3;
 
 #define BUFFER_SIZE 300
 
@@ -18,12 +23,16 @@ int main(int argc, const char* argv[]) {
     cborBuffer.length = BUFFER_SIZE;
     cborBuffer.pos = 0;
 
-    addMap(&cborBuffer, 2);
+    addMap(&cborBuffer, 3);
       // Application data.
-      addMappedTstr(&cborBuffer, 9, "Hello signed CBOR world!");
+      addMappedTstr(&cborBuffer, APP_PARAM_ONE_LABEL, "Hello signed CBOR world!");
+      addInt(&cborBuffer, APP_PARAM_TWO_LABEL);
+      addArray(&cborBuffer, 2);  // [#,#]
+        addDouble(&cborBuffer, 2.0);
+        addBool(&cborBuffer, 1 /* TRUE */);
 
       // Lastly, the signature element using an application specific key.
-      signBuffer(&cborBuffer, 10);
+      signBuffer(&cborBuffer, APP_SIGNATURE_LABEL);
 
     printCborBuffer(&cborBuffer);
 }

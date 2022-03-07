@@ -15,28 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ed25519\src\add_scalar.c">
+    <ClCompile Include="..\ed25519\src\add_scalar.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\fe.c">
+    <ClCompile Include="..\ed25519\src\fe.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\ge.c">
+    <ClCompile Include="..\ed25519\src\ge.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\keypair.c">
+    <ClCompile Include="..\ed25519\src\keypair.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\sc.c">
+    <ClCompile Include="..\ed25519\src\sc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\sha512.c">
+    <ClCompile Include="..\ed25519\src\sha512.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\sign.c">
+    <ClCompile Include="..\ed25519\src\sign.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ed25519\src\verify.c">
+    <ClCompile Include="..\ed25519\src\verify.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="signature-demo.c">
@@ -53,25 +53,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ed25519\src\ed25519.h">
+    <ClInclude Include="..\ed25519\src\ed25519.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\fe.h">
+    <ClInclude Include="..\ed25519\src\fe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\fixedint.h">
+    <ClInclude Include="..\ed25519\src\fixedint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\ge.h">
+    <ClInclude Include="..\ed25519\src\ge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\precomp_data.h">
+    <ClInclude Include="..\ed25519\src\precomp_data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\sc.h">
+    <ClInclude Include="..\ed25519\src\sc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ed25519\src\sha512.h">
+    <ClInclude Include="..\ed25519\src\sha512.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\d-cbor.h">

@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/I ..\lib /I ed25519\src %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/I ..\lib /I ..\ed25519\src %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,26 +143,26 @@
   <ItemGroup>
     <ClCompile Include="..\lib\d-cbor.c" />
     <ClCompile Include="..\lib\print-buffer.c" />
-    <ClCompile Include="ed25519\src\add_scalar.c" />
-    <ClCompile Include="ed25519\src\fe.c" />
-    <ClCompile Include="ed25519\src\ge.c" />
-    <ClCompile Include="ed25519\src\keypair.c" />
-    <ClCompile Include="ed25519\src\sc.c" />
-    <ClCompile Include="ed25519\src\sha512.c" />
-    <ClCompile Include="ed25519\src\sign.c" />
-    <ClCompile Include="ed25519\src\verify.c" />
+    <ClCompile Include="..\ed25519\src\add_scalar.c" />
+    <ClCompile Include="..\ed25519\src\fe.c" />
+    <ClCompile Include="..\ed25519\src\ge.c" />
+    <ClCompile Include="..\ed25519\src\keypair.c" />
+    <ClCompile Include="..\ed25519\src\sc.c" />
+    <ClCompile Include="..\ed25519\src\sha512.c" />
+    <ClCompile Include="..\ed25519\src\sign.c" />
+    <ClCompile Include="..\ed25519\src\verify.c" />
     <ClCompile Include="signature-demo.c" />
     <ClCompile Include="signer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\d-cbor.h" />
-    <ClInclude Include="ed25519\src\ed25519.h" />
-    <ClInclude Include="ed25519\src\fe.h" />
-    <ClInclude Include="ed25519\src\fixedint.h" />
-    <ClInclude Include="ed25519\src\ge.h" />
-    <ClInclude Include="ed25519\src\precomp_data.h" />
-    <ClInclude Include="ed25519\src\sc.h" />
-    <ClInclude Include="ed25519\src\sha512.h" />
+    <ClInclude Include="..\ed25519\src\ed25519.h" />
+    <ClInclude Include="..\ed25519\src\fe.h" />
+    <ClInclude Include="..\ed25519\src\fixedint.h" />
+    <ClInclude Include="..\ed25519\src\ge.h" />
+    <ClInclude Include="..\ed25519\src\precomp_data.h" />
+    <ClInclude Include="..\ed25519\src\sc.h" />
+    <ClInclude Include="..\ed25519\src\sha512.h" />
     <ClInclude Include="signer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

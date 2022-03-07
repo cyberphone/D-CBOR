@@ -8,7 +8,9 @@
 
 #define BUFFER_SIZE 300
 
-void main() {
+int main(int argc, const char* argv[]) {
+    (void)argc; // Avoid unused parameter error
+
     // Buffer setup, here using the stack for storage.
     unsigned char outputBuffer[BUFFER_SIZE];
     CBOR_BUFFER cborBuffer;

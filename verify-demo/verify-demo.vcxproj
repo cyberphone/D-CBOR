@@ -156,6 +156,7 @@
     <ClInclude Include="..\QCBOR\inc\qcbor\qcbor_decode.h" />
     <ClInclude Include="..\QCBOR\inc\qcbor\qcbor_spiffy_decode.h" />
     <ClInclude Include="..\QCBOR\inc\qcbor\UsefulBuf.h" />
+    <ClInclude Include="print-buffer.h" />
     <ClInclude Include="verifier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

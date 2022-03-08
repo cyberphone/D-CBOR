@@ -2,8 +2,8 @@
 
 // Minimalist CSF verifier demo using https://github.com/laurencelundblade/QCBOR
 
-#include "qcbor/qcbor_decode.h"
-#include "qcbor/qcbor_spiffy_decode.h"
+#include <qcbor/qcbor_decode.h>
+#include <qcbor/qcbor_spiffy_decode.h>
 
 #include "print-buffer.h"
 #include "verifier.h"

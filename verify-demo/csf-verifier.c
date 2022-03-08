@@ -1,12 +1,15 @@
 // csf-verifier.c
 
-// Verifies a CSF compatible signature in a CBOR map. 
+// Verifies a CSF compatible signature in a CBOR map.
+
+// Decoder support: https://github.com/laurencelundblade/QCBOR
+// Ed25519 support: https://github.com/orlp/ed25519
 
 #include <assert.h>
 #include <ed25519.h>
 
-#include "qcbor/qcbor_decode.h"
-#include "qcbor/qcbor_spiffy_decode.h"
+#include <qcbor/qcbor_decode.h>
+#include <qcbor/qcbor_spiffy_decode.h>
 
 #include "print-buffer.h"
 

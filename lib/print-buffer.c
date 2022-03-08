@@ -6,14 +6,14 @@
 
 #include <stdio.h>
 
-void printCborBuffer(CBOR_BUFFER *cborBuffer) {
+void printCborBuffer(CBOR_BUFFER *cborBuffer, char* string) {
     if (cborBuffer->length) {
-        printf("length=%d\n", cborBuffer->pos);
+        printf("%s [%d]:\n", string, cborBuffer->pos);
         for (int i = 0; i < cborBuffer->pos; i++) {
             printf("%02x", (int)cborBuffer->data[i]);
         }
     } else {
-        printf("Buffer overflow");
+        printf("BUFFER OVERFLOW!");
     }
-    printf("\n");
+    printf("\n\n");
 }

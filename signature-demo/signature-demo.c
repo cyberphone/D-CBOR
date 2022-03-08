@@ -34,5 +34,5 @@ int main(int argc, const char* argv[]) {
       // Lastly, the signature element using an application specific key.
       signBuffer(&cborBuffer, APP_SIGNATURE_LABEL);
 
-    printCborBuffer(&cborBuffer);
+    printCborBuffer(&cborBuffer, "Signed CBOR");
 }

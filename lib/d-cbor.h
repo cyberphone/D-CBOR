@@ -24,7 +24,7 @@ void addMap(CBOR_BUFFER* cborBuffer, int keys);
 
 void encodeTagAndValue(CBOR_BUFFER* cborBuffer, int tag, int length, uint64_t value);
 
-void printCborBuffer(CBOR_BUFFER* cborBuffer);
+void printCborBuffer(CBOR_BUFFER* cborBuffer, char* string);
 
 void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value);
 

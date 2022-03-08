@@ -65,5 +65,5 @@ int main(int argc, const char* argv[]) {
 #endif
 
     // Do something with the generated CBOR.
-    printCborBuffer(&cborBuffer);
+    printCborBuffer(&cborBuffer, "Deterministic CBOR");
 }

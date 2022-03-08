@@ -62,13 +62,10 @@ void signBuffer(CBOR_BUFFER* cborBuffer, int key) {
       ed25519_sign(signature, cborBuffer->data, cborBuffer->pos, public_key, private_key);
 
       // For the demo only...
-      if (ed25519_verify(signature, cborBuffer->data, cborBuffer->pos, PUBLIC_KEY)) {
-          printf("Valid signature\n");
+      if (!ed25519_verify(signature, cborBuffer->data, cborBuffer->pos, PUBLIC_KEY)) {
+          printf("INVALID SIGNATURE\n");
       }
-      else {
-          printf("Invalid signature\n");
-      }
-      printCborBuffer(cborBuffer);
+      printCborBuffer(cborBuffer, "Unsigned CBOR");
       // End of that...
 
     // Finally, add the signature blob itself.

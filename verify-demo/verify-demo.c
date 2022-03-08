@@ -6,7 +6,7 @@
 #include <qcbor/qcbor_spiffy_decode.h>
 
 #include "print-buffer.h"
-#include "verifier.h"
+#include "csf-verifier.h"
 
 /*
     {

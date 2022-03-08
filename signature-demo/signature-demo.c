@@ -5,7 +5,7 @@
 #include <d-cbor.h>
 #include <ed25519.h>
 
-#include "signer.h"
+#include "csf-signer.h"
 
 static const int APP_DATA_ONE_LABEL  = 1;
 static const int APP_DATA_TWO_LABEL  = 2;

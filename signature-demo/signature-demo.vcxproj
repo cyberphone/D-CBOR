@@ -164,7 +164,7 @@
     <ClInclude Include="..\ed25519\src\precomp_data.h" />
     <ClInclude Include="..\ed25519\src\sc.h" />
     <ClInclude Include="..\ed25519\src\sha512.h" />
-    <ClInclude Include="signer.h" />
+    <ClInclude Include="csf-signer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -80,7 +80,7 @@
     <ClInclude Include="..\lib\d-cbor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="signer.h">
+    <ClInclude Include="csf-signer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

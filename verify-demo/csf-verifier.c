@@ -7,7 +7,6 @@
 
 #include <assert.h>
 #include <ed25519.h>
-
 #include <qcbor/qcbor_decode.h>
 #include <qcbor/qcbor_spiffy_decode.h>
 

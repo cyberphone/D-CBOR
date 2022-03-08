@@ -59,7 +59,7 @@
     <ClInclude Include="..\QCBOR\inc\qcbor\qcbor_spiffy_decode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="verifier.h">
+    <ClInclude Include="csf-verifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="print-buffer.h">

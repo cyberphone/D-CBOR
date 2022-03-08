@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		constrained-device-demo\constrained-device-demo.hex = constrained-device-demo\constrained-device-demo.hex
 		d-cbor-4-constrained-devices.md = d-cbor-4-constrained-devices.md
 		README.md = README.md
-		signature-demo\signature-demo.hex = signature-demo\signature-demo.hex
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "constrained-device-demo", "constrained-device-demo\constrained-device-demo.vcxproj", "{40458A06-9E6D-473A-8BBD-74DEA07A4697}"

@@ -1,6 +1,6 @@
 // verify-demo.c
 
-// Minaímalist CSF verifier demo using https://github.com/laurencelundblade/QCBOR
+// Minimalist CSF verifier demo using https://github.com/laurencelundblade/QCBOR
 
 #include "qcbor/qcbor_decode.h"
 #include "qcbor/qcbor_spiffy_decode.h"
@@ -25,10 +25,6 @@
     }
 */
 
-static const int APP_PARAM_ONE_LABEL = 1;
-static const int APP_PARAM_TWO_LABEL = 2;
-static const int APP_SIGNATURE_LABEL = 3;
-
 static const uint8_t CSF_SIGNED_CBOR[] = {
     0xa3, 0x01, 0x78, 0x18, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64,
     0x20, 0x43, 0x42, 0x4f, 0x52, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21, 0x02, 0x82, 0xf9, 0x40,
@@ -41,6 +37,10 @@ static const uint8_t CSF_SIGNED_CBOR[] = {
     0x05, 0xb6, 0x3d, 0x06, 0x23, 0x89, 0x37, 0x81, 0xc7, 0x02, 0x6b, 0x8a, 0xe0, 0x0e, 0xec, 0x40, 
     0xa3, 0x03
 };
+
+static const int APP_DATA_ONE_LABEL  = 1;
+static const int APP_DATA_TWO_LABEL  = 2;
+static const int APP_SIGNATURE_LABEL = 3;
 
 int main(int argc, const char* argv[]) {
     (void)argc; // Avoid unused parameter error
@@ -55,37 +55,38 @@ int main(int argc, const char* argv[]) {
     QCBORDecodeContext DecodeCtx;
     QCBORDecode_Init(&DecodeCtx, UsefulOutBuf_OutUBuf(&UOB), QCBOR_DECODE_MODE_NORMAL);
 
-    printUsefulBufC(&DecodeCtx.InBuf.UB, "Original CBOR message");
+    // For debug and demo purposes only...
+    printUsefulBufC(&DecodeCtx.InBuf.UB, "Signed CBOR data");
 
-    // Decode.  Start with entering in the map.
+    // Decode.  Start by entering into the map.
     QCBORDecode_EnterMap(&DecodeCtx, NULL);
     ///////////////////////////////
-    //     Application Data      //
+    //  Fetch Application Data   //
     ///////////////////////////////
  
-      // First map entry should be a text string.
-      UsefulBufC appTextString;
-      QCBORDecode_GetTextStringInMapN(&DecodeCtx, APP_PARAM_ONE_LABEL, &appTextString);
-      // Second map entry should be a 2-dimensional array.  Step into it.
-      QCBORDecode_EnterArrayFromMapN(&DecodeCtx, APP_PARAM_TWO_LABEL);
-        // First array entry should be a floating point value.
-        double appFloatingPoint;
-        QCBORDecode_GetDouble(&DecodeCtx, &appFloatingPoint);
-        // Second array entry should be a boolean.
-        bool appBoolean;
-        QCBORDecode_GetBool(&DecodeCtx, &appBoolean);
-      // Done with the array.  Step out of it.
-      QCBORDecode_ExitArray(&DecodeCtx);
-      // End of application data.
+    // First map entry should be a text string.
+    UsefulBufC appTextString;
+    QCBORDecode_GetTextStringInMapN(&DecodeCtx, APP_DATA_ONE_LABEL, &appTextString);
+    // Second map entry should be a 2-dimensional array.  Step into it.
+    QCBORDecode_EnterArrayFromMapN(&DecodeCtx, APP_DATA_TWO_LABEL);
+      // First array entry should be a floating point value.
+      double appFloatingPoint;
+      QCBORDecode_GetDouble(&DecodeCtx, &appFloatingPoint);
+      // Second array entry should be a boolean.
+      bool appBoolean;
+      QCBORDecode_GetBool(&DecodeCtx, &appBoolean);
+    // Done with the array.  Step out of it.
+    QCBORDecode_ExitArray(&DecodeCtx);
+    // End of application data.
 
     ///////////////////////////////
-    //        Signature          //
+    //     Verify Signature      //
     ///////////////////////////////
 
     // The third map entry should contain the CSF object.  Verify it.
- 
-    // For the demo only...
     bool result = csfVerifier(&DecodeCtx, APP_SIGNATURE_LABEL);
+
+    // For the demo only...
     printf("Signature validation result: ");
     if (result) {
         printf("VALID\n");

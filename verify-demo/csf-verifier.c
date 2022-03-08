@@ -73,10 +73,10 @@ int csfVerifier(QCBORDecodeContext* pCtx, int key) {
     pCtx->InBuf.UB.len = beforeSignature;
     // Update the signature map object to reflect this change.
     ((uint8_t*)pCtx->InBuf.UB.ptr)[signatureMap]--;
+    // Now the buffer holds the data that originally was signed.
 
-    // This is the actual CBOR data that is signed.
-    // For demo purposes only...
-    printUsefulBufC(&pCtx->InBuf.UB, "Signed CBOR data");
+    // For debug and demo purposes only...
+    printUsefulBufC(&pCtx->InBuf.UB, "Unsigned CBOR data");
 
     // Finally, does the signature also verify?
     return ed25519_verify(signature.ptr, pCtx->InBuf.UB.ptr, beforeSignature, x.ptr);

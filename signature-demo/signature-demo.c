@@ -7,8 +7,8 @@
 
 #include "signer.h"
 
-static const int APP_PARAM_ONE_LABEL = 1;
-static const int APP_PARAM_TWO_LABEL = 2;
+static const int APP_DATA_ONE_LABEL  = 1;
+static const int APP_DATA_TWO_LABEL  = 2;
 static const int APP_SIGNATURE_LABEL = 3;
 
 #define BUFFER_SIZE 300
@@ -25,8 +25,8 @@ int main(int argc, const char* argv[]) {
 
     addMap(&cborBuffer, 3);
       // Application data.
-      addMappedTstr(&cborBuffer, APP_PARAM_ONE_LABEL, "Hello signed CBOR world!");
-      addInt(&cborBuffer, APP_PARAM_TWO_LABEL);
+      addMappedTstr(&cborBuffer, APP_DATA_ONE_LABEL, "Hello signed CBOR world!");
+      addInt(&cborBuffer, APP_DATA_TWO_LABEL);
       addArray(&cborBuffer, 2);  // [#,#]
         addDouble(&cborBuffer, 2.0);
         addBool(&cborBuffer, 1 /* TRUE */);

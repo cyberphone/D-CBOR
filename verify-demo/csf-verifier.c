@@ -11,6 +11,7 @@
 #include <qcbor/qcbor_spiffy_decode.h>
 
 #include "print-buffer.h"
+#include "csf-verifier.h"
 
 // CSF (CBOR Signature Format)
 static const int CSF_ALGORITHM_LABEL   = 1;

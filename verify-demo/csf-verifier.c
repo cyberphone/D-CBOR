@@ -17,7 +17,7 @@
 static const int CSF_ALGORITHM_LABEL   = 1;
 static const int CSF_KEY_ID_LABEL      = 3;
 static const int CSF_PUBLIC_KEY_LABEL  = 4;
-static const int CSF_SIGNATURE_LABEL   = 7;
+static const int CSF_SIGNATURE_LABEL   = 6;
 
 // COSE
 static const int COSE_KEY_TYPE_LABEL   = 1;

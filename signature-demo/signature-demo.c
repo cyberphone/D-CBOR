@@ -9,7 +9,7 @@
 
 static const int APP_DATA_ONE_LABEL  = 1;
 static const int APP_DATA_TWO_LABEL  = 2;
-static const int APP_SIGNATURE_LABEL = 3;
+static const int APP_SIGNATURE_LABEL = -1;
 
 #define BUFFER_SIZE 300
 

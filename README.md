@@ -36,7 +36,7 @@ The very same object using an enveloped signature:
       / kid /
       3: h'4173796d6d65747269634543445341323536',
       / signature value which encompasses all data including the top level tag /
-      7: h'b2aacaf414addfa082e6d97dcec36a928f31dd32af8f50f20e36f63af2cc05febc1f5350fca35d94fe1d3fa34b7769efeffa8c0c93bdb1ece530134f5254f75f'
+      6: h'ffb944aef83cac4fcfab3c5a8e5ecc1bf725a75d0e8014687ae7a7b611c1c238e145e43bbea9cb229d360a85224fb439c2cc25cda922e5e54965f6c9626bad59'
     }
 })
 ```

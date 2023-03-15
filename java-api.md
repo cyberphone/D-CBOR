@@ -37,6 +37,7 @@ public class dcbor {
  a5011602c24b0422ca8b0a00a425000000030a04f94200057248656c6c6f206443424f5220776f726c6421
 */
 
+           // CBOR decoding
            CBORMap cborMap = CBORObject.decode(cbor).getMap();
            System.out.println(cborMap.toString());
 /*
@@ -49,7 +50,7 @@ public class dcbor {
 }
 */
 
-           // CBOR decoding
+           // CBOR map element access
            int intArg              = cborMap.getObject(INT_ARG).getInt();
 
            // Reading order does not matter

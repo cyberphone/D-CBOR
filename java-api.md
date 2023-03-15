@@ -69,7 +69,7 @@ public class dcbor {
         } catch (Exception e) {
            System.out.println(e.getMessage());
 /*
-   #1 Map key 4 with argument of type=CBORDouble with value=3.0 was never read
+   #1 Map key 4 with argument of type=FLOATING_POINT with value=3.0 was never read
    #2 Is type: FLOATING_POINT, requested: INTEGER
 */
         }

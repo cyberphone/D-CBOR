@@ -14,11 +14,11 @@ import org.webpki.util.HexaDecimal;
 
 public class dcbor {
     // Static map keys
-    static CBORInteger INT_ARG = new CBORInteger(1);
-    static CBORInteger BIG_INT_ARG = new CBORInteger(2);
+    static CBORInteger INT_ARG         = new CBORInteger(1);
+    static CBORInteger BIG_INT_ARG     = new CBORInteger(2);
     static CBORInteger BIG_INT_OPT_ARG = new CBORInteger(3);
-    static CBORInteger DOUBLE_ARG = new CBORInteger(4);
-    static CBORInteger STRING_ARG = new CBORInteger(5);
+    static CBORInteger DOUBLE_ARG      = new CBORInteger(4);
+    static CBORInteger STRING_ARG      = new CBORInteger(5);
 
 
     public static void main(String[] args) {

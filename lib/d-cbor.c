@@ -69,13 +69,13 @@ void encodeTagAndN(CBOR_BUFFER *cborBuffer, int majorType, uint64_t n) {
     int length = 0;
     if (n > 23) {
         modifier = 27;
-        length = 8;
-        while (((MASK_LOWER_32 << ((length / 2) * 8)) & n) == 0) {
+        length = 32;
+        while (((MASK_LOWER_32 << length) & n) == 0) {
             modifier--;
             length >>= 1;
         }
     }
-    encodeTagAndValue(cborBuffer, majorType | modifier, length, n);
+    encodeTagAndValue(cborBuffer, majorType | modifier, length >> 2, n);
 }
 
 void addInt(CBOR_BUFFER* cborBuffer, int64_t value) {

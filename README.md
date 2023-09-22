@@ -5,7 +5,7 @@ _D-CBOR is a CBOR counterpart to the Distinguished Encoding Rules (DER)
 of ASN.1. D-CBOR builds on the preferred serialization options outlined 
 in RFC8949, but with another target: secure cryptographic operations that
 does not require CBOR encoded data to be hashed etc. to be wrapped in 
-byte-strings or similar in order to return a repeatable result
+byte-strings or similar in order to return a repeatable result.
 Although not the primary goal, by constraining serialization options,
 testing becomes easier, which in turn should foster interoperability._
 
@@ -46,11 +46,8 @@ even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
 
-### Constraints
-To be supplied
-
 ### Internet Draft
-To be supplied
+https://datatracker.ietf.org/doc/draft-bormann-cbor-dcbor
 
 ### FAQ
 __Q:__ Is D-CBOR a redefined CBOR?<br>

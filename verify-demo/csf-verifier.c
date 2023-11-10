@@ -36,7 +36,7 @@ int csfVerifier(QCBORDecodeContext* pCtx, int key) {
     
       // Save the position of the CSF map object.
       // Due to the limited number of CSF elements, it is just a single byte.
-      int signatureMap = pCtx->InBuf.cursor - 1;
+      size_t signatureMap = pCtx->InBuf.cursor - 1;
       // Retrieve signature algorithm.
       // COSE deviation: in CSF/FIDO/PKIX, EDDSA => Ed25519.
       int64_t algorithm;
@@ -61,7 +61,7 @@ int csfVerifier(QCBORDecodeContext* pCtx, int key) {
  
       // Retrieve the signature value.
       UsefulBufC signature;
-      int beforeSignature = pCtx->InBuf.cursor;
+      size_t beforeSignature = pCtx->InBuf.cursor;
       QCBORDecode_GetByteStringInMapN(pCtx, CSF_SIGNATURE_LABEL, &signature);
       assert(signature.len == 64);
       assert(pCtx->InBuf.cursor == pCtx->InBuf.UB.len);

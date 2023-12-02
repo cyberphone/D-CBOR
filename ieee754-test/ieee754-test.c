@@ -47,7 +47,7 @@ int main(int argc, const char* argv[]) {
     oneTurn(NAN,                      "f97e00");
     oneTurn(INFINITY,                 "f97c00");
     oneTurn(-INFINITY,                "f9fc00");
-    oneTurn(6.10649585723877e-5,      "fa38801000");
+    oneTurn(0.0000610649585723877,    "fa38801000");
     oneTurn(10.559998512268066,       "fa4128f5c1");
     oneTurn(65472.0,                  "f97bfe");
     oneTurn(65472.00390625,           "fa477fc001");

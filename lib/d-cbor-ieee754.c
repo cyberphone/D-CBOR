@@ -98,8 +98,7 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
     int64_t exponent = 
         ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) & ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
         (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
-    if (exponent < -FLOAT32_SIGNIFICAND_SIZE || 
-        exponent > ((int64_t)FLOAT32_EXPONENT_BIAS << 1)) {
+    if (exponent < -FLOAT32_SIGNIFICAND_SIZE || exponent > ((int64_t)FLOAT32_EXPONENT_BIAS << 1)) {
         // Too small or too big for float32, or running into float32 NaN/Infinity space.
         goto done;
     }

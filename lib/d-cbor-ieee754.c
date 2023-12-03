@@ -98,8 +98,9 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
     int64_t exponent = 
         ((bitFormat >> FLOAT64_SIGNIFICAND_SIZE) & ((ONE << FLOAT64_EXPONENT_SIZE) - 1)) -
         (FLOAT64_EXPONENT_BIAS - FLOAT32_EXPONENT_BIAS);
-    if (exponent > ((int64_t)FLOAT32_EXPONENT_BIAS << 1)) {
-        // Too big for float32 or into the space reserved for NaN and Infinity.
+    if (exponent < -FLOAT32_SIGNIFICAND_SIZE || 
+        exponent > ((int64_t)FLOAT32_EXPONENT_BIAS << 1)) {
+        // Too small or too big for float32, or running into float32 NaN/Infinity space.
         goto done;
     }
 
@@ -153,8 +154,9 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
 #else
     exponent -= (FLOAT32_EXPONENT_BIAS - FLOAT16_EXPONENT_BIAS);
 #endif
-    if (exponent > ((int64_t)FLOAT16_EXPONENT_BIAS << 1)) {
-        // Too big for float16 or into the space reserved for NaN and Infinity.
+    if (exponent < (int64_t)-FLOAT16_SIGNIFICAND_SIZE ||
+        exponent > ((int64_t)FLOAT16_EXPONENT_BIAS << 1)) {
+        // Too small or too big for float16, or running into float16 NaN/Infinity space.
         goto done;
     }
 
@@ -171,16 +173,13 @@ void addDouble(CBOR_BUFFER *cborBuffer, double d) {
     if (exponent <= 0) {
         // The implicit "1" becomes explicit using subnormal representation.
         significand += ONE << FLOAT16_SIGNIFICAND_SIZE;
-        exponent--;
-        // Always perform at least one turn.
-        do {
-            if ((significand & 1) != 0) {
-                // Too off scale for float16.
-                // This test also catches subnormal float32 numbers.
-                goto done;
-            }
-            significand >>= 1;
-        } while (++exponent < 0);
+        uint64_t significandCopy = significand;
+        significand >>= (1 - exponent);
+        if (significandCopy != (significand << (1 - exponent))) {
+            // Too off scale for float16.
+            goto done;
+        }
+        exponent = 0;
     }
 
     // Seems like 16 bits indeed are sufficient!

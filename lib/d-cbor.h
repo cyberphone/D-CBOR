@@ -10,7 +10,7 @@ typedef struct {
 
 void addInt(CBOR_BUFFER* cborBuffer, int64_t value);
 
-void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String);
+void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String);
 
 void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length);
 
@@ -28,7 +28,7 @@ void printCborBuffer(CBOR_BUFFER* cborBuffer, char* string);
 
 void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value);
 
-void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* utf8String);
+void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const char* utf8String);
 
 void addMappedBstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* byteString, int length);
 

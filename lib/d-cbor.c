@@ -87,10 +87,10 @@ void addInt(CBOR_BUFFER* cborBuffer, int64_t value) {
     encodeTagAndN(cborBuffer, tag, (uint64_t)value);
 }
 
-void addTstr(CBOR_BUFFER* cborBuffer, const uint8_t* utf8String) {
+void addTstr(CBOR_BUFFER* cborBuffer, const char* utf8String) {
     int length = (int)strlen(utf8String);
     encodeTagAndN(cborBuffer, MT_TEXT_STRING, length);
-    addRawBytes(cborBuffer, utf8String, length);
+    addRawBytes(cborBuffer, (const uint8_t*)utf8String, length);
 }
 
 void addBstr(CBOR_BUFFER* cborBuffer, const uint8_t* byteString, int length) {
@@ -116,7 +116,7 @@ void addMappedInt(CBOR_BUFFER* cborBuffer, int key, int value) {
     addInt(cborBuffer, value);
 }
 
-void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const uint8_t* utf8String) {
+void addMappedTstr(CBOR_BUFFER* cborBuffer, int key, const char* utf8String) {
     addInt(cborBuffer, key);
     addTstr(cborBuffer, utf8String);
 }

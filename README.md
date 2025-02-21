@@ -29,13 +29,13 @@ The very same object using an enveloped signature:
     5: 1443944944,
     6: 1443944944,
     7: h'0b71',
-    / Signature container /
+    # Signature container
     -1: {
-      / alg = ES256 /
+      # alg = ES256
       1: -7,
-      / kid /
+      # kid
       3: h'4173796d6d65747269634543445341323536',
-      / signature value which encompasses all data including the top level tag /
+      # signature value which encompasses ALL data including the top level tag
       6: h'ffb944aef83cac4fcfab3c5a8e5ecc1bf725a75d0e8014687ae7a7b611c1c238e145e43bbea9cb229d360a85224fb439c2cc25cda922e5e54965f6c9626bad59'
     }
 })
@@ -45,9 +45,6 @@ What D-CBOR brings to the table, is the ability keeping data _unwrapped_,
 even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
-
-### Internet Draft
-https://datatracker.ietf.org/doc/draft-bormann-cbor-dcbor
 
 ### FAQ
 __Q:__ Is D-CBOR a redefined CBOR?<br>

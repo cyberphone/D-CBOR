@@ -10,9 +10,22 @@ Although not the primary goal, by constraining serialization options,
 testing becomes easier, which in turn should foster interoperability._
 
 ### Example
-The following example illustrates what can be accomplished with D-CBOR:
+The following example illustrates what can be accomplished with D-CBOR.
 
-From https://datatracker.ietf.org/doc/html/rfc8392#appendix-A.3 we take an example of a CBOR Web Token (CWT):
+Imagine you want to sign the following CBOR map:
+```cbor
+18({
+  1: "coap://as.example.com",
+  2: "erikw",
+  3: "coap://light.example.com",
+  4: 1444064944,
+  5: 1443944944,
+  6: 1443944944,
+  7: h'0b71'
+})
+```
+
+Using CBOR Web Token (CWT) you get this: https://datatracker.ietf.org/doc/html/rfc8392#appendix-A.3:
 ```cbor
 18([h'a10126', {
     4: h'4173796d6d65747269634543445341323536'

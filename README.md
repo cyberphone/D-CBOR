@@ -31,7 +31,7 @@ The very same object using an enveloped signature:
   7: h'0b71',
   # Signature container
   simple(99): {
-    # alg = ES256
+    # alg = ESP256
     1: -9,
     # kid
     3: h'4173796d6d65747269634543445341323536',

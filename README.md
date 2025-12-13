@@ -22,22 +22,22 @@ From https://datatracker.ietf.org/doc/html/rfc8392#appendix-A.3 we take an examp
 The very same object using an enveloped signature:
 ```cbor
 18({
-    1: "coap://as.example.com",
-    2: "erikw",
-    3: "coap://light.example.com",
-    4: 1444064944,
-    5: 1443944944,
-    6: 1443944944,
-    7: h'0b71',
-    # Signature container
-    -1: {
-      # alg = ES256
-      1: -7,
-      # kid
-      3: h'4173796d6d65747269634543445341323536',
-      # signature value which encompasses ALL data including the top level tag
-      6: h'ffb944aef83cac4fcfab3c5a8e5ecc1bf725a75d0e8014687ae7a7b611c1c238e145e43bbea9cb229d360a85224fb439c2cc25cda922e5e54965f6c9626bad59'
-    }
+  1: "coap://as.example.com",
+  2: "erikw",
+  3: "coap://light.example.com",
+  4: 1444064944,
+  5: 1443944944,
+  6: 1443944944,
+  7: h'0b71',
+  # Signature container
+  simple(99): {
+    # alg = ES256
+    1: -9,
+    # kid
+    3: h'4173796d6d65747269634543445341323536',
+    # signature value which encompasses ALL data including the top level tag
+    6: h'ee0b1c5bc9134b5a4e0a4cf858134859986f6f3dc4a0d50777d18c193371381573b6ae26789d10a99c78303c04f82ccdb3c93793af8a9ba5bb88f14217ba4ced'
+  }
 })
 ```
 Note: the signature scheme utilized above is an example and not a part D-CBOR.

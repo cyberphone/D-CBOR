@@ -32,7 +32,7 @@ Using CBOR Web Token (CWT) you get this: https://datatracker.ietf.org/doc/html/r
 }, h'a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9f007420b71', h'5427c1ff28d23fbad1f29c4c7c6a555e601d6fa29f9179bc3d7438bacaca5acd08c8d4d4f96131680c429a01f85951ecee743a52b9b63632c57209120e1c9e30'])
 ```
 
-The very same object using an enveloped signature:
+The very same object using an embedded signature:
 ```cbor
 18({
   1: "coap://as.example.com",

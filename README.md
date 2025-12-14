@@ -34,7 +34,7 @@ Using CBOR Web Token (CWT) you get this: https://datatracker.ietf.org/doc/html/r
 
 The very same object using an embedded signature:
 ```cbor
-# Object ID, see note 2
+# Optional Object ID, see note 2
 18({
   1: "coap://as.example.com",
   2: "erikw",

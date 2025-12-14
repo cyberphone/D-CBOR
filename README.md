@@ -42,7 +42,7 @@ The very same object using an embedded signature:
   5: 1443944944,
   6: 1443944944,
   7: h'0b71',
-  # Signature container
+  # Signature container using a reserved label
   simple(99): {
     # alg = ESP256
     1: -9,

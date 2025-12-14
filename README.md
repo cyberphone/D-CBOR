@@ -60,7 +60,7 @@ even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
 
-Note 2: Using an embedded signature, the `Object ID` would not be a generic tag 18, but a tag uniquely associated with the specific object.  The COSE counterpart is not particuly elegant and have no counterpart for unsigned objects either: https://www.rfc-editor.org/rfc/rfc9596.html
+Note 2: Using an embedded signature, the `Object ID` would not be a generic tag 18, but a tag uniquely associated with the specific object.  The COSE counterpart is not particuly elegant and does not apply to _unsigned_ objects either: https://www.rfc-editor.org/rfc/rfc9596.html
 ### FAQ
 __Q:__ Is D-CBOR a redefined CBOR?<br>
 __A:__ No, D-CBOR is 100% compatible with

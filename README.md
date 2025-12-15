@@ -34,7 +34,7 @@ Using CBOR Web Token (CWT) you get this: https://datatracker.ietf.org/doc/html/r
 
 The very same object using an embedded signature:
 ```cbor
-# Optional Object ID, see note 2
+# Optional Object ID, see note
 18({
   1: "coap://as.example.com",
   2: "erikw",
@@ -54,13 +54,13 @@ The very same object using an embedded signature:
   }
 })
 ```
-Note 1: the signature scheme utilized above is not a part D-CBOR.
-What D-CBOR brings to the table, is the ability keeping data _unwrapped_,
+The signature scheme utilized above is not a part D-CBOR.
+What D-CBOR brings to the table, is the ability keeping CBOR data _unwrapped_ ("raw"),
 even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
 
-Note 2: Using an embedded signature, the `Object ID` would not be a generic tag 18, but a tag uniquely associated with the specific object.  The COSE counterpart is not particuly elegant and does not apply to _unsigned_ objects either: https://www.rfc-editor.org/rfc/rfc9596.html
+Note: Using an embedded signature, the `Object ID` would not be a generic tag 18, but a tag uniquely associated with the specific object.  The COSE counterpart is not particuly elegant and does not apply to _unsigned_ objects either: https://www.rfc-editor.org/rfc/rfc9596.html
 ### FAQ
 __Q:__ Is D-CBOR a redefined CBOR?<br>
 __A:__ No, D-CBOR is 100% compatible with

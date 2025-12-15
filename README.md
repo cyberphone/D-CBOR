@@ -55,8 +55,7 @@ The very same object using an embedded signature:
 })
 ```
 The signature scheme utilized above is not a part D-CBOR.
-What D-CBOR brings to the table, is the ability keeping CBOR data _unwrapped_ ("raw"),
-even in the case decoded data is _reencoded_.
+What D-CBOR brings to the table, is the ability keeping CBOR data _unwrapped_ ("raw").
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,
 been encoded in a similar fashion since their inception in the early 90ties.
 

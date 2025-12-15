@@ -45,16 +45,16 @@ The very same object using an embedded signature:
   7: h'0b71',
   # Signature container using a reserved label
   simple(99): {
-    # alg = ESP256
+    # Algorithm (COSE ESP256)
     1: -9,
-    # kid
+    # Key ID
     3: h'4173796d6d65747269634543445341323536',
-    # signature value which encompasses ALL data including the top level tag
+    # Signature value, encompassing the entire object including the top level tag
     6: h'ee0b1c5bc9134b5a4e0a4cf858134859986f6f3dc4a0d50777d18c193371381573b6ae26789d10a99c78303c04f82ccdb3c93793af8a9ba5bb88f14217ba4ced'
   }
 })
 ```
-Note 1: the signature scheme utilized above is an example and not a part D-CBOR.
+Note 1: the signature scheme utilized above is not a part D-CBOR.
 What D-CBOR brings to the table, is the ability keeping data _unwrapped_,
 even in the case decoded data is _reencoded_.
 This is by no means new; X.509 certificates have thanks to ASN.1 DER,

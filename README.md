@@ -45,7 +45,7 @@ The very same object using an embedded signature:
   7: h'0b71',
   # Signature container using a reserved label
   simple(99): {
-    # Algorithm (COSE ESP256)
+    # Algorithm ID (COSE ESP256)
     1: -9,
     # Key ID
     3: h'4173796d6d65747269634543445341323536',
